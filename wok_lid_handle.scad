@@ -7,7 +7,7 @@ module handle() {
                 cylinder(r1 = 15, r2=14, h=2);
             }
         }
-        cylinder(r = 3, h=20);
+        cylinder(r = 2.25, h=25);
     }
 }
 
