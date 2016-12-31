@@ -1,4 +1,4 @@
-module handle(holeDiameter) {
+module handle(holeRadius) {
     difference() {
         union() {
             cylinder(r1 = 5, r2 = 15, h = 30);
@@ -7,7 +7,7 @@ module handle(holeDiameter) {
                 cylinder(r1 = 15, r2=14, h=2);
             }
         }
-        cylinder(r = holeDiameter, h=25);
+        cylinder(r = holeRadius, h=25);
     }
 }
 
