@@ -5,18 +5,18 @@ module slot() {
 }
 
 module body() {
-    cylinder(r1 = 14.8, r2 = 14.8, h = 24);
+    cylinder(r1 = 14.8, r2 = 14.7, h = 24);
 }
 
 module peg() {
-    cylinder(r = 7.4/2, h = 5);
+    cylinder(r = 7.5/2, h = 5);
 }
 
 module holder() {
     union() {
         difference() {
             body();
-            for (i = [-6:4:+6]) {
+            for (i = [-5:5:+5]) {
                 translate([i, 0, 0]) {
                     slot();
                 }
