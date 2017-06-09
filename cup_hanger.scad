@@ -1,0 +1,50 @@
+diameter = 86;
+
+$fn=60;
+difference() {
+    union() {
+        cylinder(5, (diameter+10)/2, (diameter+10)/2);
+        rotate([90,0,0]) {
+            translate([0, 7.5, -(diameter + 20) / 2]) {
+                cylinder((diameter + 20), 7.5, 7.5);
+            }
+        }
+    }
+    cylinder(11, diameter / 2, diameter / 2);
+    rotate([90,0,0]) {
+        translate([0, 7.5, -(diameter + 20) / 2]) {
+            cylinder((diameter + 20), 2.5, 2.5);
+        }
+    }
+    translate([0, 0, 5]) {
+        cylinder(11, (diameter+10)/2, (diameter+10)/2);
+    }
+}
+
+difference() {
+    union() {
+        rotate([90,0,0]) {
+            translate([0, 7.5, -(diameter + 22) / 2]) {
+                cylinder((diameter + 22), 2.4, 2.4);
+            }
+        }
+        translate([-2.4, -diameter / 2 - 4.8, 7.5]) {
+            cube([4.8, 4.8, 15]);
+        }
+        translate([-2.4, -diameter / 2 - 9.6, 17]) {
+            cube([4.8, 4.8, 60]);
+        }
+        translate([-2.4, diameter / 2, 7.5]) {
+            cube([4.8, 4.8, 15]);
+        }
+        translate([-2.4, diameter / 2 + 4.8, 17]) {
+            cube([4.8, 4.8, 60]);
+        }
+        translate([-2.4, -(diameter + 15) / 2, 72]) {
+            cube([4.8, (diameter) + 15, 5]);
+        }        
+    }
+    translate([-3, -(diameter) / 2, 5]) {
+        cube([6, (diameter), 5]);
+    }
+}
