@@ -1,6 +1,11 @@
-diameter = 86;
+diameter = 86; 
+height = 72; // [18:]
+
+ring = true;
+handle = true;
 
 $fn=60;
+if (ring) {
 difference() {
     union() {
         cylinder(5, (diameter+10)/2, (diameter+10)/2);
@@ -20,7 +25,9 @@ difference() {
         cylinder(11, (diameter+10)/2, (diameter+10)/2);
     }
 }
+}
 
+if (handle) {
 difference() {
     union() {
         rotate([90,0,0]) {
@@ -32,19 +39,20 @@ difference() {
             cube([4.8, 4.8, 15]);
         }
         translate([-2.4, -diameter / 2 - 9.6, 17]) {
-            cube([4.8, 4.8, 60]);
+            cube([4.8, 4.8, height - 12]);
         }
         translate([-2.4, diameter / 2, 7.5]) {
             cube([4.8, 4.8, 15]);
         }
         translate([-2.4, diameter / 2 + 4.8, 17]) {
-            cube([4.8, 4.8, 60]);
+            cube([4.8, 4.8, height - 12]);
         }
-        translate([-2.4, -(diameter + 15) / 2, 72]) {
+        translate([-2.4, -(diameter + 15) / 2, height]) {
             cube([4.8, (diameter) + 15, 5]);
         }        
     }
     translate([-3, -(diameter) / 2, 5]) {
         cube([6, (diameter), 5]);
     }
+}
 }
