@@ -1,14 +1,18 @@
+// params
 width = 8;
 slot = 0.85;
 height = width * 2;
 tooth_scaling = 0.5;
 part_tolerance = 0.1;
 
-tooth_height = (width - 2)/2;
-tooth_step = tooth_height - (slot * tooth_scaling)/2;
-
+// choose which pieces to render
 inside = true;
 shell = true;
+
+
+// calcs
+tooth_height = (width - 2)/2;
+tooth_step = tooth_height - (slot * tooth_scaling)/2;
 
 if (inside) {
     translate([1, 0, 0]) {
@@ -27,7 +31,6 @@ if (inside) {
         }
     }
 }
-
 
 if (shell) {
     hole_width = width + part_tolerance * 2;
