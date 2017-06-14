@@ -39,16 +39,17 @@ if (inside) {
 
 if (shell) {
     hole_width = width + part_tolerance * 2;
-    hole_height = height + part_tolerance * 2;
+    hole_height = height+ part_tolerance * 2;
+    hole_extra_height = 0.5;
 
     translate([0, width * 2, 0]) {
         // shell
         difference() {
             // main shell
-            cube([hole_height + 3, hole_width + 4, hole_height + 2]);
+            cube([hole_height + 3 + hole_extra_height, hole_width + 4, hole_height + 2]);
             // cut out big hole
             translate([1,2,1]) {
-                cube([hole_height, hole_width, hole_height + 1]);
+                cube([hole_height + hole_extra_height, hole_width, hole_height + 1]);
             }
             // cut out card slot
             translate([0, (hole_width + 4 - slot * 2) / 2, 0]) {
@@ -59,11 +60,11 @@ if (shell) {
         // top loop flange
         difference() {
             // flange
-            translate([hole_height + 3, 0, 0]) {
+            translate([hole_height + 3 + 0.5, 0, 0]) {
                 cube([7, 3, hole_height + 2]);
             }
             // hole in flange
-            translate([hole_height + 3, 0, 4]) {
+            translate([hole_height + 3 + 0.5, 0, 4]) {
                 cube([4, 3, hole_height + 2 - 8]);
             }
         }
