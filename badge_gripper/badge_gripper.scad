@@ -23,19 +23,26 @@ tooth_step = tooth_height - (slot * tooth_slot_scaling)/2;
 
 if (inside) {
     translate([1, 0, 0]) {
-        linear_extrude(width) {
-            difference() {
-                square([height, thickness]);
-                // top slot
-                translate([height - 1 - tooth_height, (thickness - (slot + 0.1)) / 2]) {
-                    square([tooth_height, slot + 0.1]);
-                }
-                // teeth
-                for (i = [tooth_height:tooth_step:height-1]) {
-                    polygon([[i, thickness/2], [i-tooth_height, 1], [i-tooth_height,thickness-1]]);
+        difference() {
+            linear_extrude(width) {
+                difference() {
+                    // main body
+                    square([height, thickness]);
+                    // top slot
+                    translate([height - 1 - tooth_height, (thickness - (slot + 0.1)) / 2]) {
+                        square([tooth_height, slot + 0.1]);
+                    }
+                    // teeth
+                    for (i = [tooth_height:tooth_step:height-1]) {
+                        polygon([[i, thickness/2], [i-tooth_height, 1], [i-tooth_height,thickness-1]]);
+                    }
                 }
             }
-        }
+            // cross slot
+            // translate([0, 1, (width - 1) / 2]) {
+            //    cube([height - 1, thickness - 2, 1]);
+            //}
+    }
     }
 }
 
