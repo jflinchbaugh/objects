@@ -1,4 +1,4 @@
-diameter = 86; 
+diameter = 88; 
 height = 72; // [18:]
 
 ring = true;
@@ -11,14 +11,19 @@ difference() {
         cylinder(5, (diameter+10)/2, (diameter+10)/2);
         rotate([90,0,0]) {
             translate([0, 7.5, -(diameter + 20) / 2]) {
-                cylinder((diameter + 20), 7.5, 7.5);
+                cylinder(diameter + 20, 7.5, 7.5);
+            }
+            translate([-7.5, 0, -(diameter + 20) / 2]) {
+                cube([15, 7.5, diameter + 20]);
             }
         }
     }
-    cylinder(11, diameter / 2, diameter / 2);
+    translate([0, 0, -1]) {
+        cylinder(12, diameter / 2, diameter / 2);
+    }
     rotate([90,0,0]) {
-        translate([0, 7.5, -(diameter + 20) / 2]) {
-            cylinder((diameter + 20), 2.5, 2.5);
+        translate([0, 7.5, -(diameter + 21) / 2]) {
+            cylinder((diameter + 22), 2.5, 2.5);
         }
     }
     translate([0, 0, 5]) {
