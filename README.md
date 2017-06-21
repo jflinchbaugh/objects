@@ -49,7 +49,7 @@ in the canister
 and has slots for cards on top.
 There's a peg underneath
 onto which a spring can be attached
-to allow the insert to exect a bit
+to allow the insert to eject a bit
 when the canister is opened.
 
 ## space\_invaders/
