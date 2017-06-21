@@ -19,6 +19,9 @@ It includes a soft TPU core
 to form the friction grabber
 and a harder PLA shell
 which keeps rigid pressure.
+I figure it's a functional base
+for other, fancier clips,
+like a Lego clip.
 
 ## cup\_hanger.scad
 
