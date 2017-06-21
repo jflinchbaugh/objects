@@ -9,6 +9,8 @@ My fix is to round off the edge
 of the dial,
 so it's not so sharp.
 
+https://www.thingiverse.com/thing:54024
+
 ## badge\_gripper/
 
 This is an experiment
@@ -63,6 +65,8 @@ so they stick to cloth walls
 of a cubicle.
 The velcro code is likely reusable
 for other applications.
+
+https://www.thingiverse.com/thing:7310
 
 ## wok\_lid\_handle.scad
 
