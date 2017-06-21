@@ -1,10 +1,13 @@
-diameter = 88; 
-height = 70; // [20:]
+// a ring and handle to go around a travel mug or cup
 
-ring = true;
-handle = true;
+diameter = 88; // diameter of cup where the ring should catch
+height = 70; // mm, height of handle
+
+ring = true; // render ring?
+handle = true; // render handle?
 
 $fn=60;
+
 if (ring) {
     difference() {
         union() {
@@ -55,7 +58,7 @@ if (handle) {
                 }
                 translate([height + 4, -(diameter + 15) / 2, -2.4]) {
                     cube([5, (diameter) + 15, 4.8]);
-                }        
+                }
             }
             translate([-3, -(diameter) / 2, -2.5]) {
                 cube([6, (diameter), 5]);
