@@ -2,7 +2,7 @@
 
 I've been learning
 3D modeling
-in http://www.openscad.org/[OpenScad]
+in [OpenScad](http://www.openscad.org/)
 to create functional objects
 to print.
 Here are the source files
