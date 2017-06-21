@@ -1,3 +1,7 @@
+// SD card adapter for film canister
+
+$fn = 60;
+
 module slot() {
     translate([-1.5, -12.5, 0]) {
         cube([3, 25, 20]);
