@@ -1,5 +1,13 @@
 # Objects for 3D Printing
 
+I've been learning
+3D modeling
+in http://www.openscad.org/[OpenScad]
+to create functional objects
+to print.
+Here are the source files
+for my models.
+
 ## CustomizableKnob.scad
 
 This is a slight remix
