@@ -7,11 +7,11 @@ plug_depth = 7; // mm
 
 below_plug = 2; // mm
 cable_width = 6; // mm
-plug_back_depth = 4; // mm
+plug_back_depth = 3; // mm
 
-peg_width = 7.5; // mm
+peg_width = 8; // mm
 peg_height = 8; // mm
-peg_distance = 38.75; // mm between pegs
+peg_distance = 35; // mm between pegs
 
 around_peg = 4;
 
