@@ -11,7 +11,7 @@ plug_back_depth = 3; // mm
 
 peg_width = 8; // mm
 peg_height = 8; // mm
-peg_distance = 35; // mm between pegs
+peg_distance = 34.7; // mm between pegs
 
 around_peg = 4;
 
