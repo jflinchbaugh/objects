@@ -1,6 +1,6 @@
 // a ring and handle to go around a travel mug or cup
 
-diameter = 88; // diameter of cup where the ring should catch
+diameter = 87; // diameter of cup where the ring should catch
 height = 70; // mm, height of handle
 
 ring = true; // render ring?
