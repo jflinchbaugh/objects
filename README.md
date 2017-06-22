@@ -8,6 +8,10 @@ to print.
 Here are the source files
 for my models.
 
+I've provided images
+that correspond to most of the models to show
+a sample view of each.
+
 ## CustomizableKnob.scad
 
 This is a slight remix
