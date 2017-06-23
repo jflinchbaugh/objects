@@ -14,18 +14,25 @@ peg_height = 8; // mm
 peg_distance = 34.7; // mm between pegs
 
 around_peg = 4;
+rounding = 2;
 
 main_width = around_peg * 2 + peg_width * 2 + peg_distance;
 main_depth = plug_depth + plug_back_depth * 2;
 main_height = peg_height + around_peg * 2;
 
+
 difference() {
     // main body
-    cube([
-        main_width, 
-        main_depth, 
-        main_height
-    ]);
+    translate([rounding, rounding, rounding]) {
+        minkowski() {
+            cube([
+                main_width - rounding * 2, 
+                main_depth - rounding * 2, 
+                main_height - rounding *2
+            ]);
+            sphere(rounding);
+        }
+    }
     
     // cable slot
     translate([
