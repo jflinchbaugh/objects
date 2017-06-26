@@ -66,6 +66,14 @@ onto which a spring can be attached
 to allow the insert to eject a bit
 when the canister is opened.
 
+## ping\_pong\_net\_system.scad
+
+We took a cheap $5 mini ping pong game
+and improved it by replacing
+the sticks on suction cups
+with a tensioning system to clamp
+the net to the table.
+
 ## space\_invaders/
 
 Here's an early project
