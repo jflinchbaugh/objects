@@ -1,3 +1,5 @@
+// ping pong net sysytem using rubberbands for tension
+
 table_thickness = 20.5;
 length = 50;
 clamp = true;
