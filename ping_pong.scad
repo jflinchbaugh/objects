@@ -1,6 +1,8 @@
 table_thickness = 20.5;
 length = 50;
+clamp = false;
 
+if (clamp) {
     difference() {
         union() {
             // thumb
@@ -34,15 +36,38 @@ length = 50;
             }
         }
     }
+}
 
 // rail
 translate([100,0,7]) {
-    rotate([270,0,0]) {
-        linear_extrude(height = 200) {
-            rotate(270) {
-                circle(14,$fn=3);
+    difference() {
+        rotate([270,0,0]) {
+            linear_extrude(height = 200) {
+                rotate(270) {
+                    circle(14,$fn=3);
+                    translate([14, 0, 0]) {
+                        circle(3);
+                    }
+                }
+            }
+        }
+
+        translate([-7,0,7]) {
+            cube([14, 20, 10]);
+        }
+        translate([-7,200-20,7]) {
+            cube([14, 20, 10]);
+        }
+        
+        for (x=[20:16:200-20]) {
+            translate([-7,x,7]) {
+                cube([14, 12, 10]);
             }
         }
     }
-    // 100mm post x 3.5mm radius
+  
+    // post
+    translate([0,3.5,0]) {
+        cylinder(r=3.5, h=115);
+    }
 }
