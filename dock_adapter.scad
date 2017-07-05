@@ -3,7 +3,7 @@
 
 // parameters
 plug_width = 11; // mm
-plug_depth = 7; // mm
+plug_depth = 6.5; // mm
 
 below_plug = 2; // mm
 cable_width = 6; // mm
