@@ -42,6 +42,11 @@ like a Lego clip.
 Add a handle on a ring
 to a travel mug or other tapered cup.
 
+## dart\_bandolier.scad
+
+A holder for foam darts suitable to sew
+to a strap for a bandolier.
+
 ## dock\_adapter.scad
 
 Adapt a plain car mount for a phone
