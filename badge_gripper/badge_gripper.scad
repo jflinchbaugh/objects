@@ -4,13 +4,14 @@
 // ----------
 
 thickness = 7; // mm, thickness of TPU core
-height = thickness * 2; // mm, height of TPU core
-width = height * 1.25; // mm, width of TPU core
+height = 10; // mm, height of TPU core
+width = 12; // mm, width of TPU core
 slot = 0.85; // mm, thickness of card slot in TPU core
 tooth_slot_scaling = 0.4; // multiplier, scale teeth to be tighter than slot
 part_tolerance = 0.0; // mm, tolerance gap allowed by shell around core
-hole_extra_height = 0.1; // mm, extra height for hole in shell
+hole_extra_height = 0.2; // mm, extra height for hole in shell
 flange_hole = 5; // mm, space inside flange loop
+shell_thickness = 3;
 
 // choose which pieces to render, since they are different materials
 inside = true;
@@ -39,10 +40,6 @@ if (inside) {
                     }
                 }
             }
-            // cross slot
-            // translate([0, 1, (width - 1) / 2]) {
-            //    cube([height - 1, thickness - 2, 1]);
-            //}
         }
     }
 }
@@ -56,26 +53,26 @@ if (shell) {
         // shell
         difference() {
             // main shell
-            cube([hole_height + 3, hole_thickness + 4, hole_width + 2]);
+            cube([hole_height + shell_thickness + 1, hole_thickness + shell_thickness * 2, hole_width + 2]);
             // cut out big hole
-            translate([1,2,1]) {
+            translate([1,shell_thickness,1]) {
                 cube([hole_height, hole_thickness, hole_width + 1]);
             }
             // cut out card slot
-            translate([0, (hole_thickness + 4 - slot * 2) / 2, 0]) {
-                cube([hole_height, slot * 2, hole_width + 2]);
+            translate([0, (hole_thickness + shell_thickness * 2 - slot * 2) / 2, 0]) {
+                cube([hole_height, slot * 2, hole_width + shell_thickness]);
             }
         }
 
         // top loop flange
         difference() {
             // flange
-            translate([hole_height + 3, 0, 0]) {
-                cube([3 + flange_hole, 3, hole_width + 2]);
+            translate([hole_height + shell_thickness + 1, 0, 0]) {
+                cube([2 + flange_hole, 3, hole_width + 2]);
             }
             // hole in flange
-            translate([hole_height + 3, 0, 4]) {
-                cube([flange_hole, 3, hole_width + 2 - 8]);
+            translate([hole_height + shell_thickness + 1, 0, 2]) {
+                cube([flange_hole, 4, hole_width - 2]);
             }
         }
     }
