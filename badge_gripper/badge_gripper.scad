@@ -4,14 +4,16 @@
 // ----------
 
 thickness = 7; // mm, thickness of TPU core
-height = 10; // mm, height of TPU core
+height = 9; // mm, height of TPU core
 width = 12; // mm, width of TPU core
 slot = 0.85; // mm, thickness of card slot in TPU core
 tooth_slot_scaling = 0.4; // multiplier, scale teeth to be tighter than slot
 part_tolerance = 0.0; // mm, tolerance gap allowed by shell around core
 hole_extra_height = 0.2; // mm, extra height for hole in shell
+shell_thickness = 3; // mm, thickness of shell around insert
+
 flange_hole = 5; // mm, space inside flange loop
-shell_thickness = 3;
+flange_thickness = 3; // mm, thickness of solid parts of flange
 
 // choose which pieces to render, since they are different materials
 inside = true;
@@ -68,11 +70,11 @@ if (shell) {
         difference() {
             // flange
             translate([hole_height + shell_thickness + 1, 0, 0]) {
-                cube([2 + flange_hole, 3, hole_width + 2]);
+                cube([flange_thickness + flange_hole, flange_thickness, hole_width + 2]);
             }
             // hole in flange
-            translate([hole_height + shell_thickness + 1, 0, 2]) {
-                cube([flange_hole, 4, hole_width - 2]);
+            translate([hole_height + shell_thickness + 1, 0, flange_thickness]) {
+                cube([flange_hole, flange_thickness, hole_width + 2 - flange_thickness * 2]);
             }
         }
     }
