@@ -1,4 +1,4 @@
-// thumbtack
+// big push pin
 
 bottom_radius = 60;
 top_radius = 33;
