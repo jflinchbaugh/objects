@@ -3,9 +3,10 @@
 bottom_radius = 60;
 top_radius = 33;
 height = 100;
+nail_diameter = 3.2;
 
 $fn=50;
-difference() { 
+difference() {
     union() {
         translate([0,0,-30]) {
             sphere(r=bottom_radius);
@@ -21,5 +22,5 @@ difference() {
     translate([-50,-50,100]) {
         cube([100,100,100]);
     }
-    cylinder(r=1.6, h=15);
+    cylinder(r=diameter/2, h=15);
 }
