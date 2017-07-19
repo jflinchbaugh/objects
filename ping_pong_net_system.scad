@@ -1,16 +1,24 @@
 // ping pong net sysytem using rubberbands for tension
 
-table_thickness = 20.5;
+// receiver part
+table_thickness = 20.5; //mm 
 length = 50;
-clamp = true;
-rail=true;
+receiver = true;
+thumb=true; // holds under table
+tab=0; //mm, for use with spring clamps on table
 
-if (clamp) {
+// rail part
+rail=true; //mm
+rail_length = 190; //mm
+
+if (receiver) {
     difference() {
         union() {
             // thumb
-            translate([10, 0, 0]) {
-                cube([20, length, 10]);
+            if (thumb) {
+                translate([10, 0, 0]) {
+                    cube([20, length, 10]);
+                }
             }
             
             // back
@@ -19,14 +27,16 @@ if (clamp) {
             // top
             translate([0, 0, 10 + table_thickness]) {
                 cube([40, length, 15]);
+                // tab
+                cube([40 + tab, length, 5]);
             }
             
             // hooks
             translate([5, 5, 10 + table_thickness + 15]) {
-                cylinder(r=2.5,h=10);
+                cylinder(r=2.5,h=10,$fn=6);
             }
             translate([40-5, 5, 10 + table_thickness + 15]) {
-                cylinder(r=2.5,h=10);
+                cylinder(r=2.5,h=10,$fn=6);
             }
         }
         translate([20,0, 7.5+10 + table_thickness]) {
@@ -41,12 +51,11 @@ if (clamp) {
     }
 }
 
-// rail
 if (rail) {
     translate([100,0,7]) {
         difference() {
             rotate([270,0,0]) {
-                linear_extrude(height = 190) {
+                linear_extrude(height = rail_length) {
                     rotate(270) {
                         circle(14,$fn=3);
                         translate([14, 0, 0]) {
@@ -59,11 +68,11 @@ if (rail) {
             translate([-7,0,7]) {
                 cube([14, 20, 10]);
             }
-            translate([-7,190-20,7]) {
+            translate([-7,rail_length-20,7]) {
                 cube([14, 20, 10]);
             }
             
-            for (x=[20:16:190-20]) {
+            for (x=[20:16:rail_length-20]) {
                 translate([-7,x,7]) {
                     cube([14, 12, 10]);
                 }
@@ -72,7 +81,7 @@ if (rail) {
       
         // post
         translate([0,5,0]) {
-            cylinder(r=4, h=115);
+            cylinder(r=4, h=115,$fn=6);
         }
     }
 }
