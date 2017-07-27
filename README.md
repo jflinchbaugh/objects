@@ -63,6 +63,11 @@ in position to receive the phone.
 
 A little ramp doorstop for on carpet.
 
+## fiesta_hatch_cover_hinge.scad
+
+A quick hinge piece for the cover in the hatch
+of the Ford Fiesta.
+
 ## film\_card\_holder.scad
 
 Carry your SD cards
