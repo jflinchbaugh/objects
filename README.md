@@ -80,6 +80,15 @@ onto which a spring can be attached
 to allow the insert to eject a bit
 when the canister is opened.
 
+## honeycomb_grid.scad
+
+Generate a honeycomb grid snoot
+for use on a hotshoe speedlight.
+It can optionally have a little bit
+of a sleeve to fit around the flash head
+and tabs for fastening the grid
+by rubberband or other strap.
+
 ## ping\_pong\_net\_system.scad
 
 We took a cheap $5 mini ping pong game
