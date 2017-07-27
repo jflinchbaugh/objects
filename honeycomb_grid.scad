@@ -78,6 +78,9 @@ module honeycombCube(columns, rows, height, size, thickness, sleeve_height, tab_
     }
 }
 
-//66 x 41
+// 66 x 41 - YN-460II
 honeycombCube(10, 7, 15, 6.5, 0.42, 3, 10);
+
+// 76 x 49 - YN-560IV
+//honeycombCube(12, 8, 15, 6.5, 0.42, 3, 10);
 
