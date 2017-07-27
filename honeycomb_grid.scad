@@ -72,15 +72,38 @@ module honeycombCube(columns, rows, height, size, thickness, sleeve_height, tab_
             }
             translate([ thickness / 2, thickness / 2, 0 ])
             {
-                honeycomb(columns, rows, height, size, thickness);
+                honeycomb(columns + 1, rows + 1, height, size, thickness);
             }
         }
     }
 }
 
+module honeycombCubeSize(
+    width,
+    length,
+    height,
+    size,
+    thickness,
+    sleeve_height,
+    tab_height
+) {
+    columns = (width / size);
+    rows = (length / size / sqrt(3) * 2);
+
+    honeycombCube(
+        columns,
+        rows,
+        height,
+        size,
+        thickness,
+        sleeve_height,
+        tab_height
+    );
+}
+
 // 66 x 41 - YN-460II
-honeycombCube(10, 7, 15, 6.5, 0.42, 3, 10);
+honeycombCubeSize(66, 41, 15, 6.5, 0.42, 3, 10);
 
 // 76 x 49 - YN-560IV
-//honeycombCube(12, 8, 15, 6.5, 0.42, 3, 10);
+// honeycombCubeSize(76, 49, 15, 6.5, 0.42, 3, 10);
 
