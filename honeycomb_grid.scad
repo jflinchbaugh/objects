@@ -48,13 +48,22 @@ module honeycomb(columns, rows, height, size, thickness)
  * @param {Number} size      Tamaño del hexágono.
  * @param {Number} thickness Grosor de las paredes del panal.
  */
-module honeycombCube(columns, rows, height, size, thickness)
+module honeycombCube(columns, rows, height, size, thickness, sleeve_height, tab_height)
 {
     _width  = (columns - 1) * size;
     _length = (rows    - 1) * size * sqrt(3) / 2;
     difference()
     {
-        cube([ _width + thickness, _length + thickness, height ]);
+        cube([ _width + thickness, _length + thickness, height + sleeve_height + tab_height]);
+        translate([thickness, thickness, height]) {
+            cube([ _width-thickness, _length-thickness, sleeve_height + tab_height]);
+        }
+        translate([0, 0, height + sleeve_height]) {
+            cube([2 * size + thickness, _length+thickness, tab_height]);
+        }
+        translate([_width - 2 * size, 0, height + sleeve_height]) {
+            cube([2 * size + thickness, _length+thickness, sleeve_height + tab_height]);
+        }
         intersection()
         {
             translate([ thickness, thickness, 0 ])
@@ -68,4 +77,7 @@ module honeycombCube(columns, rows, height, size, thickness)
         }
     }
 }
+
+//66 x 41
+honeycombCube(10, 7, 15, 6.5, 0.42, 3, 10);
 
