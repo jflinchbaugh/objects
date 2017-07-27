@@ -18,11 +18,11 @@
 module honeycomb(columns, rows, height, size, thickness)
 {
     _halfSize = size / 2;
-    for (_row = [ 0 : rows - 1 ])
+    for (_row = [ 0 : rows ])
     {
         translate([ (_row % 2) * _halfSize, _row * _halfSize * sqrt(3), 0 ])
         {
-            for (_column = [0 : columns - 1])
+            for (_column = [0 : columns])
             {
                 translate([ _column * size, 0, 0 ])
                 {
@@ -50,8 +50,8 @@ module honeycomb(columns, rows, height, size, thickness)
  */
 module honeycombCube(columns, rows, height, size, thickness, sleeve_height, tab_height)
 {
-    _width  = (columns - 1) * size;
-    _length = (rows    - 1) * size * sqrt(3) / 2;
+    _width  = (columns ) * size;
+    _length = (rows) * size * sqrt(3) / 2;
     difference()
     {
         cube([ _width + thickness, _length + thickness, height + sleeve_height + tab_height]);
