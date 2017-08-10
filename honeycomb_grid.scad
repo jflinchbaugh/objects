@@ -57,16 +57,39 @@ module honeycombCube(columns, rows, height, size, thickness, sleeve_thickness, s
     _length = (rows) * size * sqrt(3) / 2;
     difference()
     {
+        // carve out indent for sleeve
         cube([ _width + sleeve_thickness, _length + sleeve_thickness, height + sleeve_height + tab_height]);
         translate([sleeve_thickness, sleeve_thickness, height]) {
             cube([ _width-sleeve_thickness, _length-sleeve_thickness, sleeve_height + tab_height]);
         }
+        
+        // chop off for tabs
         translate([0, 0, height + sleeve_height]) {
-            cube([2 * size + sleeve_thickness, _length+sleeve_thickness, tab_height]);
+            cube([_width / 5, _length+sleeve_thickness, tab_height]);
         }
-        translate([_width - 2 * size, 0, height + sleeve_height]) {
-            cube([2 * size + sleeve_thickness, _length+sleeve_thickness, sleeve_height + tab_height]);
+        translate([_width * 4 / 5, 0, height + sleeve_height]) {
+            cube([_width * 4 / 5 + sleeve_thickness, _length+sleeve_thickness, sleeve_height + tab_height]);
         }
+
+        // chop notch for rubberband
+        translate([0, 0, height + sleeve_height]) {
+            cube([_width / 5 + 2, _length+sleeve_thickness, tab_height - 2]);
+        }
+        translate([_width * 4 / 5 - 2, 0, height + sleeve_height]) {
+            cube([_width * 4 / 5 + sleeve_thickness + 2, _length+sleeve_thickness, tab_height - 2]);
+        }
+
+        
+        // chop slots in tabs
+        translate([_width * 2 / 5 - 1, 0, height + sleeve_height]) {
+            cube([2, _length+sleeve_thickness, sleeve_height + tab_height]);
+        }
+        translate([_width * 3 / 5 - 1, 0, height + sleeve_height]) {
+            cube([2, _length+sleeve_thickness, sleeve_height + tab_height]);
+        }
+        
+        
+        // carve out home comb
         intersection()
         {
             translate([ sleeve_thickness, sleeve_thickness, 0 ])
@@ -91,8 +114,8 @@ module honeycombCubeSize(
     sleeve_height,
     tab_height
 ) {
-    columns = (width / size);
-    rows = (length / size / sqrt(3) * 2);
+    columns = (width + sleeve_thickness * 2)  / size;
+    rows = (length + sleeve_thickness* 2) / size / sqrt(3) * 2;
 
     honeycombCube(
         columns,
@@ -107,8 +130,8 @@ module honeycombCubeSize(
 }
 
 // 66 x 41 - YN-460II
-honeycombCubeSize(66, 41, 15, 6.5, 0.42, 1.2, 3, 10);
+honeycombCubeSize(66, 41, 15, 6.6, 0.41, 1.2, 5, 11);
 
-// 76 x 49 - YN-560IV
-// honeycombCubeSize(76, 49, 15, 6.5, 0.42, 1.2, 3, 10);
+// 77 x 49 - YN-560IV
+//honeycombCubeSize(77, 49, 5, 25, 0.41, 1.2, 3, 11);
 
