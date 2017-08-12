@@ -130,7 +130,7 @@ module honeycombCubeSize(
 }
 
 // 66 x 41 - YN-460II
-honeycombCubeSize(66, 41, 15, 6.6, 0.41, 1.2, 5, 11);
+honeycombCubeSize(66, 42, 15, 6.6, 0.43, 1.6, 5, 9);
 
 // 77 x 49 - YN-560IV
 //honeycombCubeSize(77, 49, 5, 25, 0.41, 1.2, 3, 11);
