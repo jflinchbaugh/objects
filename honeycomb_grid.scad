@@ -63,32 +63,20 @@ module honeycombCube(columns, rows, height, size, thickness, sleeve_thickness, s
             cube([ _width-sleeve_thickness, _length-sleeve_thickness, sleeve_height + tab_height]);
         }
         
-        // chop off for tabs
+        // chop corner notches for rubberband
         translate([0, 0, height + sleeve_height]) {
-            cube([_width / 5, _length+sleeve_thickness, tab_height]);
+            cube([_width / 5, _length / 3 +sleeve_thickness, tab_height / 2]);
+        }
+        translate([0, _length * 2 / 3, height + sleeve_height]) {
+            cube([_width / 5, _length / 3 +sleeve_thickness, tab_height / 2]);
         }
         translate([_width * 4 / 5, 0, height + sleeve_height]) {
-            cube([_width * 4 / 5 + sleeve_thickness, _length+sleeve_thickness, sleeve_height + tab_height]);
+            cube([_width * 4 / 5 + sleeve_thickness, _length / 3+sleeve_thickness, tab_height / 2]);
         }
-
-        // chop notch for rubberband
-        translate([0, 0, height + sleeve_height]) {
-            cube([_width / 5 + 2, _length+sleeve_thickness, tab_height - 2]);
+        translate([_width * 4 / 5, _length * 2 / 3, height + sleeve_height]) {
+            cube([_width * 4 / 5 + sleeve_thickness, _length / 3+sleeve_thickness, tab_height / 2]);
         }
-        translate([_width * 4 / 5 - 2, 0, height + sleeve_height]) {
-            cube([_width * 4 / 5 + sleeve_thickness + 2, _length+sleeve_thickness, tab_height - 2]);
-        }
-
-        
-        // chop slots in tabs
-        translate([_width * 2 / 5 - 1, 0, height + sleeve_height]) {
-            cube([2, _length+sleeve_thickness, sleeve_height + tab_height]);
-        }
-        translate([_width * 3 / 5 - 1, 0, height + sleeve_height]) {
-            cube([2, _length+sleeve_thickness, sleeve_height + tab_height]);
-        }
-        
-        
+       
         // carve out home comb
         intersection()
         {
@@ -130,8 +118,8 @@ module honeycombCubeSize(
 }
 
 // 66 x 41 - YN-460II
-honeycombCubeSize(66, 42, 15, 6.6, 0.43, 1.6, 5, 9);
+//honeycombCubeSize(66, 42, 15, 6.6, 0.43, 1.6, 5, 9);
 
 // 77 x 49 - YN-560IV
-//honeycombCubeSize(77, 49, 5, 25, 0.41, 1.2, 3, 11);
+honeycombCubeSize(77, 49, 15, 6.6, 0.45, 2.0, 3, 13);
 
