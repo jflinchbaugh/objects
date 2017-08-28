@@ -65,16 +65,16 @@ module honeycombCube(columns, rows, height, size, thickness, sleeve_thickness, s
         
         // chop corner notches for rubberband
         translate([0, 0, height + sleeve_height]) {
-            cube([_width / 5, _length / 3 +sleeve_thickness, tab_height / 2]);
+            cube([_width / 3 + sleeve_thickness, _length / 3 +sleeve_thickness, tab_height / 2]);
         }
         translate([0, _length * 2 / 3, height + sleeve_height]) {
-            cube([_width / 5, _length / 3 +sleeve_thickness, tab_height / 2]);
+            cube([_width / 3 + sleeve_thickness, _length / 3 +sleeve_thickness, tab_height / 2]);
         }
-        translate([_width * 4 / 5, 0, height + sleeve_height]) {
-            cube([_width * 4 / 5 + sleeve_thickness, _length / 3+sleeve_thickness, tab_height / 2]);
+        translate([_width * 2 / 3, 0, height + sleeve_height]) {
+            cube([_width * 2 / 3 + sleeve_thickness, _length / 3+sleeve_thickness, tab_height / 2]);
         }
-        translate([_width * 4 / 5, _length * 2 / 3, height + sleeve_height]) {
-            cube([_width * 4 / 5 + sleeve_thickness, _length / 3+sleeve_thickness, tab_height / 2]);
+        translate([_width * 2 / 3, _length * 2 / 3, height + sleeve_height]) {
+            cube([_width * 2 / 3 + sleeve_thickness, _length / 3+sleeve_thickness, tab_height / 2]);
         }
        
         // carve out home comb
@@ -121,5 +121,5 @@ module honeycombCubeSize(
 //honeycombCubeSize(66, 42, 15, 6.6, 0.43, 1.6, 5, 9);
 
 // 77 x 49 - YN-560IV
-honeycombCubeSize(77, 49, 15, 6.6, 0.45, 2.0, 3, 13);
+honeycombCubeSize(77, 49, 15, 6.6, 0.45, 4.0, 5, 13);
 
