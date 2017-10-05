@@ -3,8 +3,8 @@
 // parameters
 // ----------
 
-thickness = 7; // mm, thickness of TPU core
-height = 9; // mm, height of TPU core
+thickness = 6; // mm, thickness of TPU core
+height = 12; // mm, height of TPU core
 width = 12; // mm, width of TPU core
 slot = 0.85; // mm, thickness of card slot in TPU core
 tooth_slot_scaling = 0.4; // multiplier, scale teeth to be tighter than slot
