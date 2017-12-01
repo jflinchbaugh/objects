@@ -1,10 +1,11 @@
 // a ring and handle to go around a travel mug or cup
 
-diameter = 87; // diameter of cup where the ring should catch
-height = 70; // mm, height of handle
+diameter = 82.5; // diameter of cup where the ring should catch
+height = 60; // mm, height of handle
 
 ring = true; // render ring?
 handle = true; // render handle?
+offset_for_lid = true;
 
 $fn=60;
 
@@ -44,20 +45,40 @@ if (handle) {
                         cylinder((diameter + 22), 2.4, 2.4);
                     }
                 }
-                translate([0, -diameter / 2 - 4.8, -2.4]) {
+                translate([
+                    0,
+                    -diameter / 2 - 4.8 ,
+                    -2.4
+                ]) {
                     cube([15, 4.8, 4.8]);
                 }
-                translate([9, -diameter / 2 - 9.6, -2.4]) {
+                translate([
+                    9,
+                    -diameter / 2 - 4.8 - (offset_for_lid ? 4.8 : 0),
+                    -2.4
+                ]) {
                     cube([height, 4.8, 4.8]);
                 }
                 translate([0, diameter / 2, -2.4]) {
                     cube([15, 4.8, 4.8]);
                 }
-                translate([9, diameter / 2 + 4.8, -2.4]) {
+                translate([
+                    9,
+                    diameter / 2 + (offset_for_lid ? 4.8 : 0),
+                    -2.4
+                ]) {
                     cube([height, 4.8, 4.8]);
                 }
-                translate([height + 4, -(diameter + 15) / 2, -2.4]) {
-                    cube([5, (diameter) + 15, 4.8]);
+                translate([
+                    height + 4,
+                    -(diameter + 10 + (offset_for_lid ? 5 : 0)) / 2,
+                    -2.4
+                ]) {
+                    cube([
+                        5,
+                        (diameter) + 10 + (offset_for_lid ? 5 : 0) ,
+                        4.8
+                    ]);
                 }
             }
             translate([-3, -(diameter) / 2, -2.5]) {
