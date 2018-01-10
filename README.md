@@ -97,6 +97,11 @@ the sticks on suction cups
 with a tensioning system to clamp
 the net to the table.
 
+## ruuvi\_sleeve.scad
+
+A holder sleeve to hang a ruuvi tag
+on a jacket or whatever.
+
 ## space\_invaders/
 
 Here's an early project
