@@ -8,7 +8,9 @@ $fn=60;
 
 difference() {
     union() {
+        // main body
         cylinder(height + wall * 2, diameter/2 + wall, diameter/2 + wall);
+        // hanger loop
         translate([diameter/2 + wall * 2, 0, 0]) {
             difference() {
                 cylinder(3, 5, 5);
@@ -16,6 +18,8 @@ difference() {
             }
         }
     }
+
+    // slice out the hole, leaving the lip
     cylinder(height + wall * 2, diameter/2 - wall, diameter/2 - wall);
     translate([0, 0, wall]) {
         cylinder(height, diameter/2, diameter/2);
