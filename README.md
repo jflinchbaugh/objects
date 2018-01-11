@@ -97,6 +97,12 @@ the sticks on suction cups
 with a tensioning system to clamp
 the net to the table.
 
+## polarity\_piece.scad
+
+A game piece for Polarity. 
+Print a big pile of them
+and insert the magnets.
+
 ## ruuvi\_sleeve.scad
 
 A holder sleeve to hang a ruuvi tag
