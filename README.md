@@ -37,6 +37,25 @@ I figure it's a functional base
 for other, fancier clips,
 like a Lego clip.
 
+## bmw\_i3\_key\_cover.scad
+
+i3 owners have a common problem
+that the unlock button
+on the key fob is sometimes
+easy to rest on when in your pocket.
+Unlocking is one problem,
+but holding the button
+puts down the windows,
+which can be disasterous.
+This sleeve covers it,
+so the buttoms 
+are less accessible.
+This is generally fine
+with comfort access
+that allows you
+to access the vehicle 
+by touching the handles.
+
 ## cup\_hanger.scad
 
 Add a handle on a ring
