@@ -1,14 +1,16 @@
-height = 61.5;
-bottom_width = 44.2;
-top_width = 49.65;
-thickness = 10;
+height = 61;
+bottom_width = 44;
+top_width = 49;
+thickness = 11;
 
 bottom_round = 5;
 top_round = 10;
 
 ring_offset = 14.3;
 
-skin = 2;
+skin = 2.5;
+
+cover_height = 45;
 
 $fn=40;
 
@@ -17,13 +19,13 @@ difference() {
         height = height + skin * 2, 
         bottom_width = bottom_width + skin * 2, 
         top_width = top_width + skin * 2,
-        thickness = thickness + skin * 2,
+        thickness = thickness + skin * 4,
         bottom_round = bottom_round + skin * 2,
         top_round = top_round + skin * 2
     );
 
     union() {
-        translate([0, skin, skin]) {
+        translate([0, skin, skin * 2]) {
             fob(
                 height = height, 
                 bottom_width = bottom_width, 
@@ -33,7 +35,7 @@ difference() {
                 top_round = top_round
             );
         };
-        translate([0, skin * 2, 0]) {
+        translate([0, skin * 2, skin]) {
             fob(
                 height = height - skin * 2,
                 bottom_width = bottom_width - skin * 2,
@@ -43,10 +45,36 @@ difference() {
                 top_round = top_round
             );
         };
+        translate([0 - bottom_width / 2 + skin * 2, skin * 2, skin]) {
+            cube([
+                bottom_width - skin * 4,
+                height + skin * 2,
+                thickness + skin * 2
+            ]);
+        };
         
-        translate([top_width / 2 - ring_offset, height, 0]) {
-            cylinder(h = thickness + skin * 2, r = 2);
-        }
+        translate([
+            0 - top_width / 2 - skin, 
+            cover_height, 
+            thickness + skin * 3
+        ]) {
+            cube([
+                top_width + skin * 2,
+                height + skin * 2 - cover_height, 
+                skin
+            ]); 
+        };
+        translate([
+            0 - top_width / 2 - skin, 
+            cover_height, 
+            0
+        ]) {
+            cube([
+                top_width + skin * 2,
+                height + skin * 2 - cover_height, 
+                skin
+            ]); 
+        };
     };
 }
 
