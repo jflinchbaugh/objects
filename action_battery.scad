@@ -16,13 +16,23 @@ linear_extrude(thickness) {
             );
             translate([0, battery_diameter / 2 + arm_length]) {
                 square([arm_length, thickness]);
-                translate([arm_length, thickness / 2]) {
-                    circle(thickness * 2);
+                translate([arm_length + thickness * 2, thickness / 2]) {
+                    difference() {
+                        circle(thickness * 2.5);
+                        square([thickness, thickness * 3], true);
+                    }
                 }            }
-            translate([0, 0 - (battery_diameter / 2 + arm_length + thickness)]) {
+            translate([
+                0, 
+                0 - (battery_diameter / 2 + arm_length + thickness)
+            ]) {
                 square([arm_length, thickness]);
-                translate([arm_length, thickness / 2]) {
-                    circle(thickness * 2);
+                translate([arm_length + thickness * 2, thickness / 2]) {
+                    difference() {
+                        circle(thickness * 2.5);
+                        square([thickness, thickness * 3], true);
+                        square([thickness * 3, thickness], true);
+                    }
                 }
             }
         }
