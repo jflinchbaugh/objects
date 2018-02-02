@@ -3,6 +3,7 @@ thickness = 1.2;
 arm_length = 15;
 $fn=30;
 
+// the arms
 linear_extrude(thickness) {
     difference() {
         union() {
@@ -37,5 +38,29 @@ linear_extrude(thickness) {
             }
         }
         circle(battery_diameter / 2);
+    }
+}
+
+// the feet
+translate([battery_diameter * 2, 0, 0]) {
+    linear_extrude(thickness * 3) {
+        difference() {
+            union() {
+                circle(battery_diameter / 2 + thickness);
+                translate([
+                    battery_diameter / 2, 
+                    battery_diameter / 2, 0
+                ]) {
+                    circle(battery_diameter / 3);
+                }
+                translate([
+                    battery_diameter / 2, 
+                    0 - battery_diameter / 2, 0
+                ]) {
+                    circle(battery_diameter / 3);
+                }
+            }
+            circle(battery_diameter / 2);
+        }
     }
 }
