@@ -42,7 +42,7 @@ linear_extrude(thickness) {
 }
 
 // the feet
-translate([battery_diameter * 2, 0, 0]) {
+translate([battery_diameter * 1.5, 0, 0]) {
     linear_extrude(thickness * 3) {
         difference() {
             union() {
@@ -61,6 +61,35 @@ translate([battery_diameter * 2, 0, 0]) {
                 }
             }
             circle(battery_diameter / 2);
+        }
+    }
+}
+
+// head
+translate([0 - battery_diameter * 1.5, 0, 0]) {
+    difference() {
+        linear_extrude(15) {
+            difference() {
+                union() {
+                    circle(battery_diameter / 2 + thickness);
+                }
+                circle(battery_diameter / 2);
+            }
+        }
+        // hair
+        translate([0,0,15]) {
+            for (spin = [0:20:180]) {
+                rotate([45, 0, spin]) {
+                    cube([battery_diameter + thickness * 2, 2, 2], true);
+                }
+            }
+        }
+        translate([2,0,6]) {
+            for (spin = [-20:40:20]) {
+                rotate([45, 0, spin]) {
+                    cube([battery_diameter + thickness * 2, 2, 2], true);
+                }
+            }
         }
     }
 }
