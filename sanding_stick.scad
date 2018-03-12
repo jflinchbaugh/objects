@@ -28,10 +28,11 @@ difference() {
     }
 }
 
+// inside guide stick
 translate([0, 10, 0]) {
     cube([
         band_length - 20 - spring_length, 
-        guide_thickness - 0.12, 
-        guide_thickness - 0.12
+        guide_thickness - 0.2, 
+        guide_thickness - 0.2
     ]);
 }
