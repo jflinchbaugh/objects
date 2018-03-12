@@ -1,6 +1,6 @@
 spring_length = 35; // mm
-band_thickness = 6; // mm
-band_length = 150; // mm
+band_thickness = 7; // mm
+band_length = 155; // mm
 
 guide_thickness = band_thickness / 2;
 
@@ -31,7 +31,7 @@ difference() {
 translate([0, 10, 0]) {
     cube([
         band_length - 20 - spring_length, 
-        guide_thickness - 0.1, 
-        guide_thickness - 0.1
+        guide_thickness - 0.12, 
+        guide_thickness - 0.12
     ]);
 }
