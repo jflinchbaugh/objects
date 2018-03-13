@@ -12,8 +12,8 @@ difference() {
                 translate([0, band_thickness / -2]) {
                     square([band_length - 20, band_thickness]);
                     polygon(points = [
-                        [band_length - 20, 0], 
-                        [band_length, 0], 
+                        [band_length - 20, 0],
+                        [band_length, 0],
                         [band_length - 20, band_thickness]
                     ]);
                 }
@@ -31,8 +31,8 @@ difference() {
 // inside guide stick
 translate([0, 10, 0]) {
     cube([
-        band_length - 20 - spring_length, 
-        guide_thickness - 0.2, 
-        guide_thickness - 0.2
+        band_length - 20 - spring_length,
+        guide_thickness - 0.4,
+        guide_thickness - 0.4
     ]);
 }
