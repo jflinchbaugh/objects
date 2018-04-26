@@ -1,14 +1,15 @@
 height = 61;
 bottom_width = 44;
 top_width = 49;
-thickness = 11;
+thickness = 10.5;
 
 bottom_round = 5;
 top_round = 10;
 
 ring_offset = 14.3;
 
-skin = 2.5;
+face_skin = 1.2;
+side_skin = 2.4;
 
 cover_height = 45;
 
@@ -16,16 +17,16 @@ $fn=40;
 
 difference() {
     fob(
-        height = height + skin * 2, 
-        bottom_width = bottom_width + skin * 2, 
-        top_width = top_width + skin * 2,
-        thickness = thickness + skin * 4,
-        bottom_round = bottom_round + skin * 2,
-        top_round = top_round + skin * 2
+        height = height + side_skin * 2, 
+        bottom_width = bottom_width + side_skin * 2, 
+        top_width = top_width + side_skin * 2,
+        thickness = thickness + face_skin * 4,
+        bottom_round = bottom_round + side_skin * 2,
+        top_round = top_round + side_skin * 2
     );
 
     union() {
-        translate([0, skin, skin * 2]) {
+        translate([0, side_skin, face_skin * 2]) {
             fob(
                 height = height, 
                 bottom_width = bottom_width, 
@@ -35,44 +36,48 @@ difference() {
                 top_round = top_round
             );
         };
-        translate([0, skin * 2, skin]) {
+        translate([0, side_skin * 2, face_skin]) {
             fob(
-                height = height - skin * 2,
-                bottom_width = bottom_width - skin * 2,
-                top_width = top_width - skin * 2,
-                thickness = thickness + skin * 2,
+                height = height - side_skin * 2,
+                bottom_width = bottom_width - side_skin * 2,
+                top_width = top_width - side_skin * 2,
+                thickness = thickness + face_skin * 2,
                 bottom_round = bottom_round,
                 top_round = top_round
             );
         };
-        translate([0 - bottom_width / 2 + skin * 2, skin * 2, skin]) {
+        translate([
+            0 - bottom_width / 2 + side_skin * 2, 
+            side_skin * 2, 
+            face_skin
+        ]) {
             cube([
-                bottom_width - skin * 4,
-                height + skin * 2,
-                thickness + skin * 2
+                bottom_width - side_skin * 4,
+                height + side_skin * 2,
+                thickness + face_skin * 2
             ]);
         };
         
         translate([
-            0 - top_width / 2 - skin, 
+            0 - top_width / 2 - side_skin, 
             cover_height, 
-            thickness + skin * 3
+            thickness + face_skin * 3
         ]) {
             cube([
-                top_width + skin * 2,
-                height + skin * 2 - cover_height, 
-                skin
+                top_width + side_skin * 2,
+                height + side_skin * 2 - cover_height, 
+                face_skin
             ]); 
         };
         translate([
-            0 - top_width / 2 - skin, 
+            0 - top_width / 2 - side_skin, 
             cover_height, 
             0
         ]) {
             cube([
-                top_width + skin * 2,
-                height + skin * 2 - cover_height, 
-                skin
+                top_width + side_skin * 2,
+                height + side_skin * 2 - cover_height, 
+                face_skin
             ]); 
         };
     };
