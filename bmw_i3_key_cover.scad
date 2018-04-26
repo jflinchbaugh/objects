@@ -26,6 +26,7 @@ difference() {
     );
 
     union() {
+        // inside cut-out for fob sides
         translate([0, side_skin, face_skin * 2]) {
             fob(
                 height = height, 
@@ -36,6 +37,8 @@ difference() {
                 top_round = top_round
             );
         };
+
+        // inside cut-out for fob face
         translate([0, side_skin * 2, face_skin]) {
             fob(
                 height = height - side_skin * 2,
@@ -46,6 +49,8 @@ difference() {
                 top_round = top_round
             );
         };
+
+        // center cut-out for "fingers"
         translate([
             0 - bottom_width / 2 + side_skin * 2, 
             side_skin * 2, 
@@ -58,6 +63,7 @@ difference() {
             ]);
         };
         
+        // top cut-out of face 1
         translate([
             0 - top_width / 2 - side_skin, 
             cover_height, 
@@ -69,6 +75,8 @@ difference() {
                 face_skin
             ]); 
         };
+
+        // top cut-out of face 2
         translate([
             0 - top_width / 2 - side_skin, 
             cover_height, 
@@ -79,6 +87,16 @@ difference() {
                 height + side_skin * 2 - cover_height, 
                 face_skin
             ]); 
+        };
+        
+        // circle cut-out
+        translate([
+            0, cover_height / 2, 0
+        ]) {
+            cylinder(
+                h = thickness + face_skin * 4,
+                r = (top_width + bottom_width) / 6
+            );
         };
     };
 }
