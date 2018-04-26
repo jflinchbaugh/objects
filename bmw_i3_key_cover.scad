@@ -12,6 +12,7 @@ face_skin = 1.2;
 side_skin = 2.4;
 
 cover_height = 45;
+hole = 1;  // 0 for no hole
 
 $fn=40;
 
@@ -95,7 +96,7 @@ difference() {
         ]) {
             cylinder(
                 h = thickness + face_skin * 4,
-                r = (top_width + bottom_width) / 6
+                r = hole * (top_width + bottom_width) / 6
             );
         };
     };
