@@ -33,5 +33,5 @@ difference() {
     }
     
     // nail hole
-    cylinder(r = diameter / 2, h = height / 2);
+    cylinder(r = nail_diameter / 2, h = height / 2);
 }
