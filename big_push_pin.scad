@@ -3,24 +3,35 @@
 bottom_radius = 60;
 top_radius = 33;
 height = 100;
-nail_diameter = 3.2;
+nail_diameter = 4;
 
-$fn=50;
+$fn=60;
 difference() {
     union() {
-        translate([0,0,-30]) {
+        // bottom sphere
+        translate([0,0,bottom_radius / -2]) {
             sphere(r=bottom_radius);
         }
-        translate([0,0,105]) {
+
+        // top sphere
+        translate([0,0,height + top_radius / 3 ]) {
             sphere(r=top_radius);
         }
-        cylinder(r1=23, r2=20, h = height);
+
+        // center column
+        cylinder(r1=bottom_radius/2.7, r2=top_radius/1.7, h = height);
     }
-    translate([-1 * bottom_radius,-1 * bottom_radius, -2 * bottom_radius]) {
+
+    // bottom cut-off
+    translate([-bottom_radius,-bottom_radius, -2 * bottom_radius]) {
         cube([2 * bottom_radius,2 * bottom_radius ,2 * bottom_radius]);
     }
-    translate([-50,-50,100]) {
-        cube([100,100,100]);
+    
+    // top cut-off
+    translate([-top_radius,-top_radius,height]) {
+        cube([2 * top_radius, 2 * top_radius, 2 * top_radius]);
     }
-    cylinder(r=diameter/2, h=15);
+    
+    // nail hole
+    cylinder(r = diameter / 2, h = height / 2);
 }
