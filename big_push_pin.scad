@@ -1,9 +1,9 @@
 // big push pin
 
-bottom_radius = 60;
-top_radius = 33;
-height = 100;
-nail_diameter = 4;
+bottom_radius = 30;
+top_radius = 16;
+height = 50;
+nail_diameter = 3.5;
 
 $fn=60;
 difference() {
