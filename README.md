@@ -56,6 +56,15 @@ that allows you
 to access the vehicle 
 by touching the handles.
 
+## caliper\_battery\_holder.scad 
+
+I created a little sleeve 
+to hold the battery
+for my digital calipers,
+since the battery
+seemed to die when laying around
+in the calipers unused.
+
 ## cup\_hanger.scad
 
 Add a handle on a ring
