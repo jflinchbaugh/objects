@@ -7,6 +7,13 @@ screw_diameter = 3.2; //mm
 
 $fn=60;
 
+// a washer
+*difference() {
+    cylinder(r=arm_height/2, h = thickness);
+    cylinder(r=screw_diameter / 2, h = thickness);
+}
+
+// the main arm
 difference() {
     union() {
         cylinder(r=pen_diameter / 2 + thickness, h=arm_height);
