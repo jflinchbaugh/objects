@@ -13,12 +13,13 @@ peg_width = 8; // mm
 peg_height = 8; // mm
 peg_distance = 34.7; // mm between pegs
 
-around_peg = 4;
-rounding = 2;
+extra_height = 4; // mm
+around_peg = 4; // mm
+rounding = 2; // mm
 
 main_width = around_peg * 2 + peg_width * 2 + peg_distance;
 main_depth = plug_depth + plug_back_depth * 2;
-main_height = peg_height + around_peg * 2;
+main_height = peg_height + around_peg * 2 + extra_height;
 
 
 difference() {
