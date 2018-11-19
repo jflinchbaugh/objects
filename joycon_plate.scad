@@ -4,10 +4,10 @@ flange_neck = 7.0;
 plate_thickness = 5;
 plate_width = 15;
 flange_height = 85;
-plate_height = 95;
+plate_height = 105;
 pairs = 4;
+hole_diameter = 5;
 
-hole_diameter = 4;
 $fn=40;
 
 module set() {
@@ -38,7 +38,8 @@ for(i = [0:pairs - 1]) {
             translate([
                 0,
                 flange_width / 2,
-                flange_height + (plate_height - flange_height) / 2
+                //flange_height + (plate_height - flange_height) / 2
+                plate_height - flange_width / 2 - hole_diameter / 4
             ]) {
                 rotate([0,90,0]) {
                     cylinder(
