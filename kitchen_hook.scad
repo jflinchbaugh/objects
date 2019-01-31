@@ -3,7 +3,12 @@ $fn=60;
 
 linear_extrude(width) {
     difference() {
-        square([width * 3, width * 6]);
+        translate([width / 2, width / 2]) {
+            minkowski() {
+                square([width * 2, width * 5]);
+                circle(d=width);
+            }
+        }
         translate([0, width * 2]) {
             square([width * 2, width]);
         }
