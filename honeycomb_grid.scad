@@ -170,30 +170,30 @@ strap_length = 50; // mm
 // honeycombCubeSize(77, 49, 17, 6.6, 0.5, sleeve_thickness, 20);
 
 // straps
-module strap(strap_length, sleeve_thickness, tolerance) {
+module strap(strap_length, strap_width, sleeve_thickness, tolerance) {
     difference() {
         cube([
-            20 - 2 * tolerance, 
+            strap_width - 2 * tolerance, 
             strap_length, 
             sleeve_thickness - tolerance
         ]);
         translate([sleeve_thickness, sleeve_thickness, 0]) {
             cube([
-                20 - tolerance - 5 * sleeve_thickness, 
+                strap_width - tolerance - 5 * sleeve_thickness, 
                 strap_length - 2 * sleeve_thickness,
                 sleeve_thickness - tolerance
             ]);
         }
         translate([sleeve_thickness * 4 - tolerance, sleeve_thickness, 0]) {
             cube([
-                20 - tolerance - 5 * sleeve_thickness, 
+                strap_width - tolerance - 5 * sleeve_thickness, 
                 strap_length - 2 * sleeve_thickness,
                 sleeve_thickness - tolerance
             ]);
         }
         translate([sleeve_thickness, sleeve_thickness, 0]) {
             cube([
-                20 - 2 * tolerance - 2 * sleeve_thickness, 
+                strap_width - 2 * tolerance - 2 * sleeve_thickness, 
                 strap_length - 6 * sleeve_thickness,
                 sleeve_thickness - tolerance
             ]);
@@ -201,11 +201,11 @@ module strap(strap_length, sleeve_thickness, tolerance) {
     }
     translate([-1 * sleeve_thickness, 0, 0]) {
         cube([
-            20 + 2 * sleeve_thickness - tolerance * 2, 
+            strap_width + 2 * sleeve_thickness - tolerance * 2, 
             sleeve_thickness, 
             sleeve_thickness
         ]);
     }
 }
 
-strap(strap_length, sleeve_thickness, tolerance);
+strap(strap_length, 20, sleeve_thickness, tolerance);
