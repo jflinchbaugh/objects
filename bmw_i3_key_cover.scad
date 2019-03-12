@@ -11,7 +11,7 @@ ring_offset = 14.3;
 face_skin = 1.2;
 side_skin = 2.4;
 
-cover_height = 45;
+cover_height = 50;
 hole = 1;  // 0 for no hole
 
 $fn=40;
@@ -37,7 +37,7 @@ difference() {
                 bottom_round = bottom_round,
                 top_round = top_round
             );
-        };
+        }
 
         // inside cut-out for fob face
         translate([0, side_skin * 2, face_skin]) {
@@ -49,7 +49,7 @@ difference() {
                 bottom_round = bottom_round,
                 top_round = top_round
             );
-        };
+        }
 
         // center cut-out for "fingers"
         translate([
@@ -62,7 +62,7 @@ difference() {
                 height + side_skin * 2,
                 thickness + face_skin * 2
             ]);
-        };
+        }
         
         // top cut-out of face 1
         translate([
@@ -75,7 +75,7 @@ difference() {
                 height + side_skin * 2 - cover_height, 
                 face_skin
             ]); 
-        };
+        }
 
         // top cut-out of face 2
         translate([
@@ -88,18 +88,24 @@ difference() {
                 height + side_skin * 2 - cover_height, 
                 face_skin
             ]); 
-        };
+        }
         
-        // circle cut-out
-        translate([
-            0, cover_height / 2, 0
-        ]) {
-            cylinder(
-                h = thickness + face_skin * 4,
-                r = hole * (top_width + bottom_width) / 6
-            );
-        };
-    };
+        // button cut-out
+        if (hole) {
+          translate([
+              (top_width + bottom_width) / -12, side_skin * 4, face_skin
+          ]) {
+              minkowski() {
+                  cube([
+                      (top_width + bottom_width) / 6,
+                      cover_height - side_skin * 7,
+                      thickness + face_skin * 3
+                  ]);
+                  cylinder(r=side_skin);
+              }
+          }
+        }
+    }
 }
 
 
@@ -113,6 +119,6 @@ module fob() {
                 [0 - top_width / 2 + bottom_round, height - bottom_round]
             ]);
             circle(bottom_round);
-        };
-    };
+        }
+    }
 }
