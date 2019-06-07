@@ -5,13 +5,13 @@ fin_height = 3;
 
 bar_width = 18;
 bar_height_low = 4.5;
-bar_height_high = 9.5;
-bar_length = 70;
+bar_height_high = 11.5;
+bar_length = 58;
 bar_cut_out = 0;
 bar_hole = 3.5;
 bar_slot = 3.0;
 bar_cross_length = 50;
-bar_cross_offset = 5;
+bar_cross_offset = 0;
 
 $fn=120;
 
