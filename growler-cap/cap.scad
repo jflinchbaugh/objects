@@ -1,17 +1,19 @@
-inner_diameter = 46;
-fins = 3;
-fin_thickness = 2;
-fin_height = 3;
+// parameters for the seal
+inner_diameter = 46; // mm
+fins = 3; // mm
+fin_thickness = 2; // mm
+fin_height = 3; // mm
 
-bar_width = 18;
-bar_height_low = 4.5;
-bar_height_high = 11.5;
-bar_length = 58;
-bar_cut_out = 0;
-bar_hole = 3.5;
-bar_slot = 3.0;
-bar_cross_length = 50;
-bar_cross_offset = 0;
+// parameters for the pressure top
+bar_width = 18; // mm
+bar_height_low = 4.5; // mm
+bar_height_high = 11.5; // mm
+bar_length = 58; // mm
+bar_cut_out = 0; // mm
+bar_hole = 3.5; // mm
+bar_slot = 3.0; // mm
+bar_cross_length = 50; // mm
+bar_cross_offset = 0; // mm
 
 $fn=120;
 
@@ -66,39 +68,43 @@ module seal() {
 }
 
 module bar() {
-  difference() {
-    translate([0, -5, 0]) {
-      cube([bar_height_high + bar_hole / 2, 10 + bar_length, bar_width]);
+  rotate([0, -90, 0]) {
+    difference() {
+      translate([0, -5, 0]) {
+        cube([bar_height_high + bar_hole / 2, 10 + bar_length, bar_width]);
+      }
+      translate([bar_height_low + bar_hole / 2, 0, 0]) {
+        cylinder(d=bar_hole, h=bar_width);
+      }
+      translate([bar_height_low + bar_hole / 2, bar_slot / -2, 0]) {
+        cube([bar_height_high - bar_height_low, bar_slot, bar_width]);
+      }
+      translate([bar_height_high + bar_hole / 2, bar_length, 0]) {
+        cylinder(d=bar_hole, h=bar_width);
+      }
+      translate([0, 5, 0]) {
+        cube([bar_cut_out, 15, bar_width]);
+      }
+      translate([0, bar_length - 25, 0]) {
+          cube([bar_cut_out, 15, bar_width]);
+      }
     }
-    translate([bar_height_low + bar_hole / 2, 0, 0]) {
-      cylinder(d=bar_hole, h=bar_width);
-    }
-    translate([bar_height_low + bar_hole / 2, bar_slot / -2, 0]) {
-      cube([bar_height_high - bar_height_low, bar_slot, bar_width]);
-    }
-    translate([bar_height_high + bar_hole / 2, bar_length, 0]) {
-      cylinder(d=bar_hole, h=bar_width);
-    }
-    translate([0, 5, 0]) {
-      cube([bar_cut_out, 15, bar_width]);
-    }
-    translate([0, bar_length - 25, 0]) {
-         cube([bar_cut_out, 15, bar_width]);
-    }
-  }
 
-  // cross
-  translate([0, bar_length / 2 - bar_cross_offset, bar_width / 2]) {
-    rotate([0, 90, 0]) {
-      cylinder(d=bar_cross_length, h=bar_height_high + bar_hole / 2);
+    // cross
+    translate([0, bar_length / 2 - bar_cross_offset, bar_width / 2]) {
+      rotate([0, 90, 0]) {
+        cylinder(d=bar_cross_length, h=bar_height_high + bar_hole / 2);
+      }
     }
   }
 }
 
-rotate([0, -90, 0]) {
-  bar();
-}
+// solid (petg) top cap
+bar();
 
-// seal();
+// soft (tpu) seal
+translate([0, -1 * inner_diameter, 0]) {
+  seal();
+}
 
 
