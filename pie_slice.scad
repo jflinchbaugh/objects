@@ -8,6 +8,7 @@ module pie(start, angle, radius, fn=$fn) {
   }
 }
 
+// private module to calculate slice
 module slice(start,angle,rad) {
      if (angle <= 45) {
           x1=sin(start)*rad;
