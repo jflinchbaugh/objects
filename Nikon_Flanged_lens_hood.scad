@@ -8,9 +8,9 @@
 //Thickness of tube walls
 thickness=2.0;
 //Inside diameter of bottom tube
-d1_inside=87;
+d1_inside=87.5;
 //Height of bottom tube
-h1=1.2;
+h1=1.4;
 //Inside diameter of top tube
 d2_inside=95;
 //Height of top tube
