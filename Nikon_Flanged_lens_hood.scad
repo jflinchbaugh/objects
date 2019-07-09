@@ -6,23 +6,23 @@
 
 
 //Thickness of tube walls
-thickness=2.4;
+thickness=2.0;
 //Inside diameter of bottom tube
-d1_inside=92;
+d1_inside=87;
 //Height of bottom tube
-h1=3;
+h1=1.2;
 //Inside diameter of top tube
-d2_inside=100;
+d2_inside=95;
 //Height of top tube
 h2=45;
 //Height of connector section
-c_ht=5;
+c_ht=4;
 // Percentage of circumference for one flange
 f_pcent=16;
 // Flange thickness
-f_th=3.0;
+f_th=1.2;
 //Flange height
-f_ht=1.5;
+f_ht=1.4;
 // Resolution
 $fn=90;
 
