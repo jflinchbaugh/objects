@@ -28,7 +28,7 @@ difference() {
     }
     hull() {
       translate([0, 0, plate_thickness - 0.5]) {
-        cube([leg_width_x_top, leg_width_y_top, 0.1], center=true);
+        cube([leg_width_x_top, leg_width_y_top, 0.0001], center=true);
       }
       bottom(0);
     }
