@@ -108,6 +108,11 @@ onto which a spring can be attached
 to allow the insert to eject a bit
 when the canister is opened.
 
+## growler_cap/
+
+This replaces the ceramic cap
+that I broke off my 2L growler.
+
 ## honeycomb_grid.scad
 
 Generate a honeycomb grid snoot
