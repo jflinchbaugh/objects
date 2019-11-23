@@ -30,6 +30,8 @@ module outer_shell() {
   }
 }
 
+// inner shell is enlarged by the gap_angle,
+// but keeps the given diameter when compressed
 module inner_shell() {
   ratio = gap_angle / 360 + 1;
   translate([0,0,-inner_edge]) {
