@@ -95,9 +95,7 @@ if (rail) {
 }
 
 if (stick) {
-  translate([120,0,diameter / 2]) {
-    rotate([270,0,0]) {
-      cylinder(d=diameter, h=height);
-    }
+  translate([125,0,0]) {
+    cylinder(d=diameter, h=height);
   }
 }
