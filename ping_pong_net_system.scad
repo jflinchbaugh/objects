@@ -1,15 +1,23 @@
 // ping pong net sysytem using rubberbands for tension
 
 // receiver part
+receiver = true;
 table_thickness = 20.5; //mm 
 length = 50;
-receiver = true;
 thumb=true; // holds under table
 tab=0; //mm, for use with spring clamps on table
 
 // rail part
 rail=true; //mm
 rail_length = 190; //mm
+
+// stick
+stick = true;
+height = 115; // mm
+diameter = 6.84; // mm
+tolerance = 0.1; // mm
+
+$fn=40;
 
 if (receiver) {
     difference() {
@@ -33,10 +41,10 @@ if (receiver) {
             
             // hooks
             translate([5, 5, 10 + table_thickness + 15]) {
-                cylinder(r=2.5,h=10,$fn=6);
+                cylinder(r=2.5,h=10);
             }
             translate([40-5, 5, 10 + table_thickness + 15]) {
-                cylinder(r=2.5,h=10,$fn=6);
+                cylinder(r=2.5,h=10);
             }
         }
         translate([20,0, 7.5+10 + table_thickness]) {
@@ -52,7 +60,7 @@ if (receiver) {
 }
 
 if (rail) {
-    translate([100,0,7]) {
+    translate([75,0,7]) {
         difference() {
             rotate([270,0,0]) {
                 linear_extrude(height = rail_length) {
@@ -71,17 +79,25 @@ if (rail) {
             translate([-7,rail_length-20,7]) {
                 cube([14, 20, 10]);
             }
-            
+
             for (x=[20:16:rail_length-20]) {
                 translate([-7,x,7]) {
                     cube([14, 12, 10]);
                 }
             }
-        }
-      
-        // post
-        translate([0,5,0]) {
-            cylinder(r=4, h=115,$fn=6);
+
+            // post
+            translate([0,5,-7]) {
+                cylinder(d=diameter + tolerance, h=14);
+            }
         }
     }
+}
+
+if (stick) {
+  translate([120,0,diameter / 2]) {
+    rotate([270,0,0]) {
+      cylinder(d=diameter, h=height);
+    }
+  }
 }
