@@ -1,6 +1,6 @@
 $fn=50;
 
-thread_inside_diameter = 15;
+thread_inside_diameter = 15.5;
 thread_size = 6;
 thread_length = 25;
 wall_thickness = 2.4;
