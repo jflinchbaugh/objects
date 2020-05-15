@@ -1,22 +1,42 @@
 $fn=50;
 
-diameter = 25;
+thread_inside_diameter = 15;
+thread_size = 6;
+thread_length = 25;
+wall_thickness = 2.4;
+diameter = thread_inside_diameter + thread_size + wall_thickness * 2;
+hook_length = 20;
+rounding = 3;
 
 // http://dkprojects.net/openscad-threads/threads.scad
 use <threads.scad>
 
 difference() {
-    translate([0,0, 0.5]) {
-        cylinder(d=diameter, h=26);
-        translate([0,0,26 + 15]) {
-            difference() {
-                cube([4,diameter,30], true);
-                translate([0, 4, 0]) {
-                    cube([4.5, diameter - 3.9, 22], true);
-                }
-            }
-        }
+  cylinder(d=diameter, h = thread_length + wall_thickness + hook_length);
+  translate([0,0,-0.1]) {
+    metric_thread(
+      diameter=thread_inside_diameter + thread_size,
+      pitch=5,
+      thread_size=thread_size,
+      length=thread_length,
+      internal=true,
+      square=true,
+      leadin=0);
+    cylinder(d=thread_inside_diameter, h = thread_length + hook_length - wall_thickness + 0.1);
+  }
+  translate([wall_thickness + rounding, diameter / -2, thread_length + rounding]) {
+    minkowski() {
+      cube([diameter - rounding * 2, diameter, hook_length + wall_thickness * 2 - rounding * 2]);
+      sphere(rounding);
     }
-  
-    metric_thread(diameter=21, pitch=5, thread_size=6, length=25, internal=true, square=true, leadin=0);
+  }
+  translate([wall_thickness * -1 - diameter + rounding, diameter / -2, thread_length + rounding]) {
+    minkowski() {
+      cube([diameter - rounding * 2, diameter, hook_length + wall_thickness * 2 - rounding * 2]);
+      sphere(rounding);
+    }
+  }
+  translate([diameter / -2, 0, thread_length]) {
+    cube([diameter, diameter, hook_length - wall_thickness]);
+  }
 }
