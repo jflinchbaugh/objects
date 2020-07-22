@@ -8,9 +8,14 @@ clip_width = pen_thickness;
 clip_height = 2 * loop_height - pen_thickness / 2;
 clip_gap = 13; // mm
 clip_wall_thickness = 2 * wall_thickness;
+clip_gap_radius = 2; //mm
 
-ring();
-    clip();
+$fn=24;
+
+union() {
+  ring();
+  clip();
+}
 
 module ring() {
   difference() {
@@ -46,11 +51,20 @@ module clip() {
           }
         }
 
-        hull() {
-          translate([clip_wall_thickness, 0, (clip_gap + 2 * clip_wall_thickness) / 2])
-            cube([clip_width, clip_width + cut_shift, clip_gap], true);
-          translate([clip_height, 0, clip_wall_thickness]) {
-            cylinder(d=clip_width + cut_shift, h=clip_gap);
+        minkowski() {
+          hull() {
+            translate([clip_wall_thickness, 0, (clip_gap + 2 * clip_wall_thickness) / 2])
+              cube([
+                  clip_width - 2 * clip_gap_radius,
+                  clip_width + cut_shift,
+                  clip_gap - 2 * clip_gap_radius],
+                  true);
+            translate([clip_height, 0, clip_wall_thickness + clip_gap_radius]) {
+              cylinder(d=clip_width + cut_shift, h = clip_gap - 2 * clip_gap_radius);
+            }
+          }
+          rotate([90,90,0]) {
+            cylinder(h=0.1, r=clip_gap_radius);
           }
         }
       }
