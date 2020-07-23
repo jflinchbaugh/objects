@@ -1,12 +1,12 @@
 wall_thickness = 1.2; //mm
-pen_thickness = 18; // mm
+pen_thickness = 21; // mm
 pen_count = 2;
 extra_width_between = 2; //mm
 loop_height = 20; //mm
 cut_shift = 0.1;
 clip_width = pen_thickness;
 clip_height = 2 * loop_height - pen_thickness / 2;
-clip_gap = 13; // mm
+clip_gap = 5; // mm
 clip_wall_thickness = 2 * wall_thickness;
 clip_gap_radius = 2; //mm
 
