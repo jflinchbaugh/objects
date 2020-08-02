@@ -7,7 +7,7 @@ screw_head_depth = 1.5; //mm
 screw_head_diameter = 5; //mm
 $fn=48;
 
-loop=false;
+loop=true;
 hook=true;
 
 if (loop) {
