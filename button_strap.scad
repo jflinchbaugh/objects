@@ -3,9 +3,11 @@ strap_width = 25; //mm
 length = thickness * 5;
 tolerance=0.2; //mm
 screw_diameter = 2; //mm
+screw_head_depth = 1.5; //mm
+screw_head_diameter = 5; //mm
 $fn=48;
 
-loop=true;
+loop=false;
 hook=true;
 
 if (loop) {
@@ -56,8 +58,11 @@ if (hook) {
     difference() {
       union() {
         hull() {
-          translate([strap_width / -2 - 2 * thickness, -4 * thickness, 0]) {
-            cube([strap_width + 4 * thickness, thickness * 5, thickness]);
+          translate([strap_width / -2 - thickness, -3 * thickness, 0]) {
+            minkowski() {
+              cube([strap_width + 2 * thickness, thickness * 4, thickness / 2]);
+              cylinder(d=2 * thickness, h=thickness / 2);
+            }
           }
           translate([0, 4 * thickness, 0]) {
             cylinder(d=4 * thickness, h=thickness);
@@ -85,8 +90,8 @@ if (hook) {
       translate([0, 4 * thickness, -0.1]) {
         cylinder(d=screw_diameter, h=3 * thickness + 0.2);
       }
-      translate([0, 4 * thickness, 3 * thickness - screw_diameter]) {
-        cylinder(d=screw_diameter * 2, h=thickness + 0.1);
+      translate([0, 4 * thickness, 3 * thickness - screw_head_depth]) {
+        cylinder(d=screw_head_diameter, h=thickness + 0.1);
       }
 
       // slot
