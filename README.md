@@ -76,6 +76,7 @@ die in my calipers,
 so I remove the battery
 while it's not in use and store it in
 this little holder.
+It's meant to be made from TPE.
 
 ## cup\_hanger.scad
 
