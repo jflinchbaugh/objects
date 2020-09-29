@@ -69,6 +69,14 @@ since the battery
 seemed to die when laying around
 in the calipers unused.
 
+## caliper\_battery\_holder.scad
+
+The LR44 battery would occasionally
+die in my calipers,
+so I remove the battery
+while it's not in use and store it in
+this little holder.
+
 ## cup\_hanger.scad
 
 Add a handle on a ring
@@ -95,7 +103,7 @@ in position to receive the phone.
 
 A little ramp doorstop for on carpet.
 
-## fiesta_hatch_cover_hinge.scad
+## fiesta\_hatch\_cover\_hinge.scad
 
 A quick hinge piece for the cover in the hatch
 of the Ford Fiesta.
