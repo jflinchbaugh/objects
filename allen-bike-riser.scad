@@ -1,5 +1,5 @@
 length = 42;
-cradle_side_thickness = 5;
+cradle_side_thickness = 4.8;
 cradle_thickness = 33;
 height = 50;
 cradle_radius = 25;
@@ -83,25 +83,27 @@ difference() {
 }
 
 module strap_ring() {
-  difference() {
-    cube([
-           length + 6 * cradle_side_thickness,
-           cradle_thickness + 2 * cradle_side_thickness,
-           cradle_side_thickness],
-         true);
-    translate([(length + 3 * cradle_side_thickness) / 2, 0, 0]) {
+  translate([0, 0, height / 3]) {
+    difference() {
       cube([
-             cradle_side_thickness,
-             strap_width,
-             cradle_side_thickness + 0.1],
-           true);
-    }
-    translate([(length + 3 * cradle_side_thickness) / - 2, 0, 0]) {
-      cube([
-             cradle_side_thickness,
-             strap_width,
-             cradle_side_thickness + 0.1],
-           true);
+            length + 6 * cradle_side_thickness,
+            cradle_thickness + 2 * cradle_side_thickness,
+            2 * cradle_side_thickness],
+          true);
+      translate([(length + 3 * cradle_side_thickness) / 2, 0, 0]) {
+        cube([
+              cradle_side_thickness,
+              strap_width,
+              2 * cradle_side_thickness + 0.1],
+            true);
+      }
+      translate([(length + 3 * cradle_side_thickness) / - 2, 0, 0]) {
+        cube([
+              cradle_side_thickness,
+              strap_width,
+              2 * cradle_side_thickness + 0.1],
+            true);
+      }
     }
   }
 }
