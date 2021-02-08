@@ -3,7 +3,7 @@ mount_thickness = 2.0; //mm
 mount_height = 57; //mm
 
 wall_thickness = 4.0; //mm
-spool_thickness = 17; //mm
+spool_thickness = 14; //mm
 spool_length = 85 ; //mm
 
 rounding = 1; //mm
