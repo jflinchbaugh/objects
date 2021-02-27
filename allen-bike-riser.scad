@@ -1,7 +1,7 @@
 length = 42;
 cradle_side_thickness = 4.8;
 cradle_thickness = 33;
-height = 50;
+height = 52;
 cradle_radius = 25;
 strap_width = 25;
 side_wall_height = 11;
@@ -83,7 +83,7 @@ difference() {
 }
 
 module strap_ring() {
-  translate([0, 0, height / 3]) {
+  translate([0, 0, height / 2 - cradle_side_thickness]) {
     difference() {
       cube([
             length + 6 * cradle_side_thickness,
