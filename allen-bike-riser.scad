@@ -48,6 +48,16 @@ difference() {
     translate([
                  0,
                  0,
+                 height / -2 + sqrt(cradle_radius * cradle_radius - (length * length / 4))
+                 - cradle_radius
+                 ]) {
+      rotate([0,45,0]) {
+        cube([3, cradle_thickness + 2 * cradle_side_thickness, 3], true);
+      }
+    }
+    translate([
+                 0,
+                 0,
                  0 - side_wall_height
                  - (cradle_radius - sqrt(cradle_radius * cradle_radius - (length * length / 4)))]) {
       difference() {
@@ -99,8 +109,8 @@ module strap_ring() {
       }
       translate([(length + 3 * cradle_side_thickness) / - 2, 0, 0]) {
         cube([
-              cradle_side_thickness,
-              strap_width,
+              cradle_side_thickness * 4,
+              strap_width + cradle_side_thickness,
               2 * cradle_side_thickness + 0.1],
             true);
       }
