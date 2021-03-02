@@ -1,10 +1,11 @@
-length = 42;
+length = 41;
 cradle_side_thickness = 4.8;
 cradle_thickness = 33;
 height = 52;
-cradle_radius = 25;
+cradle_radius = 24;
 strap_width = 25;
 side_wall_height = 11;
+tooth_size=5;
 
 $fn = 48;
 
@@ -52,7 +53,7 @@ difference() {
                  - cradle_radius
                  ]) {
       rotate([0,45,0]) {
-        cube([3, cradle_thickness + 2 * cradle_side_thickness, 3], true);
+        cube([tooth_size, cradle_thickness + 2 * cradle_side_thickness, tooth_size], true);
       }
     }
     translate([
@@ -110,7 +111,7 @@ module strap_ring() {
       translate([(length + 3 * cradle_side_thickness) / - 2, 0, 0]) {
         cube([
               cradle_side_thickness * 4,
-              strap_width + cradle_side_thickness,
+              strap_width + 2 * cradle_side_thickness,
               2 * cradle_side_thickness + 0.1],
             true);
       }
