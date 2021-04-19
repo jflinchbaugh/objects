@@ -19,14 +19,14 @@ joint_tolerance=0.4;
 
 stopper_radius_outside=cap_radius;
 stopper_radius_inside=cap_radius - cap_side_thickness * 2;
-stopper_length=cap_length;
+stopper_length=cap_length-cap_side_thickness;
 
 ring_thickness=1.85;
 ring_radius=11.05/2;
 ring_spacing=3.23;
 
-cap=true;
-arm=true;
+cap=false;
+arm=false;
 stopper=true;
 
 $fn=60;
@@ -127,15 +127,24 @@ if (arm) {
 if (stopper) {
   translate([-cap_radius - joint_radius - cap_side_thickness * 2, 0, 0]) {
     difference() {
-      cylinder(
-        $fn=8,
-        r1=stopper_radius_inside,
-        r2=stopper_radius_outside,
-        h=stopper_length - cap_side_thickness,
-        center=true);
+      union() {
+        cylinder(
+          $fn=8,
+          r=stopper_radius_inside,
+          h=stopper_length,
+          center=true);
+        translate([0,0,(stopper_length-stopper_length/2)/2]) {
+          cylinder(
+            $fn=8,
+            r1=stopper_radius_inside,
+            r2=stopper_radius_outside,
+            h=stopper_length/2,
+            center=true);
+        }
+      }
       cylinder(
         r=joint_screw_hole_radius,
-        h=stopper_length - cap_side_thickness + 0.01,
+        h=stopper_length + 0.01,
         center=true);
     }
   }
