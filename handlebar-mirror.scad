@@ -1,39 +1,51 @@
 // end cap for handlebars that can receive a certain bike mirror
 
-cap_radius=7;
-cap_length=15;
-cap_side_thickness=1.5;
-cap_slot_thickness=1.5;
+cap_radius=19.8/2;
+cap_length=20;
+cap_side_thickness=2.4;
+cap_slot_thickness=1;
+
+cap_lip_thickness=cap_side_thickness / 2;
+cap_lip_radius=cap_radius+cap_side_thickness;
+
+arm_length=13;
+arm_radius=7.83/2;
 
 joint_radius=cap_radius - cap_side_thickness;
-joint_height=3;
-joint_screw_hole_radius=0.5;
-joint_free_hole_radius=1.0;
-joint_tolerance=0.1;
+joint_height=arm_radius * 2 - cap_side_thickness;
+joint_screw_hole_radius=3.3/2;
+joint_free_hole_radius=3.9/2;
+joint_tolerance=0.4;
 
-arm_length=6;
-arm_radius=2;
-
-ring_thickness=1;
-ring_radius=arm_radius + 1;
-ring_spacing=2;
+ring_thickness=1.85;
+ring_radius=11.05/2;
+ring_spacing=3.23;
 
 cap=true;
-arm=true;
+arm=false;
 
-$fn=36;
+$fn=60;
 
 // cap
 if (cap) {
   difference() {
     union() {
       cylinder(r=cap_radius, h=cap_length, center=true);
+      translate([0,0,(cap_lip_thickness-cap_length)/2]) {
+        cylinder(r=cap_lip_radius, h=cap_lip_thickness, center=true);
+      }
       translate([0,0,-cap_length/2]) {
-        cylinder(r=joint_radius, h=joint_height * 2, center=true);
+        cylinder(
+          r=joint_radius - joint_tolerance,
+          h=(joint_height + joint_tolerance) * 2,
+          center=true);
       }
     }
     translate([0,0,-cap_length/2]) {
-      cylinder(r=joint_screw_hole_radius, h=joint_height * 2 + 0.01, center=true);
+      cylinder(
+        r=joint_screw_hole_radius,
+        h=(joint_height + joint_tolerance) * 2 + 0.01,
+        center=true);
     }
     translate([0,0,cap_side_thickness]) {
       cylinder(
@@ -70,8 +82,8 @@ if (arm) {
             center=true);
           translate([0,0,cap_side_thickness/2]) {
             cylinder(
-              r=joint_radius + joint_tolerance,
-              h=joint_height + joint_tolerance,
+              r=joint_radius,
+              h=joint_height + 0.01,
               center=true);
           }
           cylinder(
