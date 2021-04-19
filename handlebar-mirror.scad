@@ -1,28 +1,33 @@
 // end cap for handlebars that can receive a certain bike mirror
 
 cap_radius=19.8/2;
-cap_length=20;
+cap_length=21;
 cap_side_thickness=2.4;
 cap_slot_thickness=1;
 
-cap_lip_thickness=cap_side_thickness / 2;
-cap_lip_radius=cap_radius+cap_side_thickness;
+cap_lip_thickness=cap_side_thickness;
+cap_lip_radius=cap_radius+cap_side_thickness*2;
 
 arm_length=13;
 arm_radius=7.83/2;
 
 joint_radius=cap_radius - cap_side_thickness;
 joint_height=arm_radius * 2 - cap_side_thickness;
-joint_screw_hole_radius=3.3/2;
-joint_free_hole_radius=3.9/2;
+joint_screw_hole_radius=3.5/2;
+joint_free_hole_radius=4.0/2;
 joint_tolerance=0.4;
+
+stopper_radius_outside=cap_radius;
+stopper_radius_inside=cap_radius - cap_side_thickness * 2;
+stopper_length=cap_length;
 
 ring_thickness=1.85;
 ring_radius=11.05/2;
 ring_spacing=3.23;
 
 cap=true;
-arm=false;
+arm=true;
+stopper=true;
 
 $fn=60;
 
@@ -43,7 +48,7 @@ if (cap) {
     }
     translate([0,0,-cap_length/2]) {
       cylinder(
-        r=joint_screw_hole_radius,
+        r=joint_free_hole_radius,
         h=(joint_height + joint_tolerance) * 2 + 0.01,
         center=true);
     }
@@ -114,6 +119,24 @@ if (arm) {
           }
         }
       }
+    }
+  }
+}
+
+// stopper
+if (stopper) {
+  translate([-cap_radius - joint_radius - cap_side_thickness * 2, 0, 0]) {
+    difference() {
+      cylinder(
+        $fn=8,
+        r1=stopper_radius_inside,
+        r2=stopper_radius_outside,
+        h=stopper_length - cap_side_thickness,
+        center=true);
+      cylinder(
+        r=joint_screw_hole_radius,
+        h=stopper_length - cap_side_thickness + 0.01,
+        center=true);
     }
   }
 }
