@@ -13,7 +13,7 @@ peg_width = 13.0; // mm
 peg_height = 8.5; // mm
 peg_distance = 15.0; // mm between inside of pegs
 
-extra_height = 4; // mm
+extra_height = 1; // mm
 around_peg = 4; // mm
 rounding = 2; // mm
 
