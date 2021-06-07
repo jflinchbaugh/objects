@@ -9,9 +9,9 @@ below_plug = 2; // mm
 cable_width = 7.2; // mm
 plug_back_depth = 3; // mm
 
-peg_width = 8; // mm
-peg_height = 8; // mm
-peg_distance = 34.7; // mm between pegs
+peg_width = 13.0; // mm
+peg_height = 8.5; // mm
+peg_distance = 15.0; // mm between inside of pegs
 
 extra_height = 4; // mm
 around_peg = 4; // mm
@@ -27,18 +27,18 @@ difference() {
     translate([rounding, rounding, rounding]) {
         minkowski() {
             cube([
-                main_width - rounding * 2, 
-                main_depth - rounding * 2, 
+                main_width - rounding * 2,
+                main_depth - rounding * 2,
                 main_height - rounding *2
             ]);
             sphere(rounding);
         }
     }
-    
+
     // cable slot
     translate([
         (main_width - cable_width) / 2,
-        0, 
+        0,
         0
     ]) {
         cube([
@@ -47,11 +47,11 @@ difference() {
             main_height
         ]);
     }
-    
+
     // plug slot
     translate([
         (main_width - plug_width) / 2,
-        plug_back_depth, 
+        plug_back_depth,
         below_plug
     ]) {
         cube([
@@ -60,12 +60,12 @@ difference() {
             main_height - below_plug
         ]);
     }
-    
+
     // left peg
     translate([
         around_peg,
-        0, 
-        around_peg
+        0,
+        main_height - around_peg - peg_height
     ]) {
         cube([
             peg_width,
@@ -73,13 +73,13 @@ difference() {
             peg_height
         ]);
     }
-    
-        
+
+
     // right peg
     translate([
         main_width - peg_width - around_peg,
-        0, 
-        around_peg
+        0,
+        main_height - around_peg - peg_height
     ]) {
         cube([
             peg_width,
