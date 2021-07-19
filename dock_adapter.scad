@@ -2,8 +2,8 @@
 // phone mount.
 
 // parameters
-plug_width = 12.25; // mm
-plug_depth = 6.40; // mm
+plug_width = 10.74; // mm
+plug_depth = 5.54; // mm
 
 below_plug = 2; // mm
 cable_width = 7.2; // mm
