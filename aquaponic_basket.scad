@@ -33,7 +33,6 @@ difference() {
              h=height, center = true);
   }
   
-  
   //slots
   for (h=[0:slot_angle:180]) {
       rotate([0,0,h]){
