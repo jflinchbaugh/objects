@@ -3,9 +3,10 @@ arm_thickness = 8; //mm
 arm_length = disc_diameter*2/3; //mm
 arm_tooth_length = 20; //mm
 arm_tooth_grip = 5; //mm
+arm_back_stop = 15; //mm
 
 thumb_tooth_length = arm_tooth_length; //mm 
-thumb_length = disc_diameter*1/3; //mm
+thumb_length = disc_diameter*1/3 + arm_thickness; //mm
 thumb_tooth_grip = 3; //mm
 thumb_string_hole_diameter = 5; //mm
 
@@ -16,10 +17,12 @@ center_height = arm_thickness;
 center_width = 4 * arm_thickness;
 center_length = 4 * arm_thickness;
 
-center_tab_thickness = 3; //mm
+center_tab_thickness = 5; //mm
 center_tab_height = thumb_tooth_length;
 center_tab_angle = -15; // degrees
 attach_hole_diameter = 5; //mm
+
+rounding=2; //mm
 
 hinge_tolerance = 0.5;
 
@@ -28,26 +31,37 @@ $fn=60;
 module thumb() {
   difference() {
     linear_extrude(height=arm_thickness, center=true) {
-      polygon(points=[[0,0],
-                      [0, arm_thickness],
-                      [thumb_length-arm_thickness, arm_thickness],
-                      [thumb_length-arm_thickness, arm_thickness+thumb_tooth_length],
-                      [thumb_length-arm_thickness, arm_thickness+thumb_tooth_length-arm_thickness],
-                      [thumb_length-arm_thickness-thumb_tooth_grip, arm_thickness+thumb_tooth_length-arm_thickness],
-                      [thumb_length-arm_thickness-thumb_tooth_grip, arm_thickness+thumb_tooth_length],
-                      [thumb_length, arm_thickness+thumb_tooth_length],
-                      [thumb_length, 0],
-                      [thumb_length/2, 0],
-                      [thumb_length/4, -thumb_tooth_length/2],
-                      [thumb_length/4+thumb_string_hole_diameter, -thumb_tooth_length],
-                      [thumb_length/4-arm_thickness/2-thumb_string_hole_diameter/2, -thumb_tooth_length],
-                      [thumb_length/4-arm_thickness/2-thumb_string_hole_diameter/2, 0]
+      minkowski() {
+        polygon(points=[[rounding, rounding],
+                      [rounding, arm_thickness-rounding],
+                      [thumb_length-arm_thickness+rounding,
+                       arm_thickness-rounding],
+                      [thumb_length-arm_thickness+rounding,
+                       arm_thickness+thumb_tooth_length-arm_thickness+rounding],
+                      [thumb_length-arm_thickness-thumb_tooth_grip+rounding,
+                       arm_thickness+thumb_tooth_length-rounding],
+                      [thumb_length-rounding,
+                       arm_thickness+thumb_tooth_length-rounding],
+                      [thumb_length-rounding,
+                       rounding],
+                      [2*arm_thickness-rounding,
+                       rounding],
+                      [arm_thickness-rounding,
+                       -thumb_tooth_length/2],
+                      [arm_thickness + thumb_string_hole_diameter-rounding,
+                       -thumb_tooth_length+rounding],
+                      [rounding,
+                       -thumb_tooth_length+rounding],
+                      [rounding,
+                       rounding]
                       ]);
+        circle(r=rounding);
+      }
     }
     translate([arm_thickness/2, arm_thickness/2, 0]) {
       cylinder(d=screw_diameter + screw_tolerance, h=arm_thickness + 0.1, center=true);
     }
-    translate([thumb_length/4-thumb_string_hole_diameter/2,
+    translate([rounding+thumb_string_hole_diameter/2,
                -thumb_tooth_length+thumb_string_hole_diameter,
                0]) {
       cylinder(d=thumb_string_hole_diameter, h=arm_thickness + 0.1, center=true);
@@ -58,18 +72,26 @@ module thumb() {
 module arm() {
   difference() {
     linear_extrude(height=arm_thickness, center=true) {
-      polygon(points=[[0,0],
-                      [0, arm_thickness],
-                      [arm_length-arm_thickness, arm_thickness],
-                      [arm_length-arm_thickness, arm_thickness+arm_tooth_length],
-                      [arm_length-arm_thickness, arm_thickness+arm_tooth_length-arm_thickness],
-                      [arm_length-arm_thickness-arm_tooth_grip, arm_thickness+arm_tooth_length-arm_thickness],
-                      [arm_length-arm_thickness-arm_tooth_grip, arm_thickness+arm_tooth_length],
-                      [arm_length, arm_thickness+arm_tooth_length],
-                      [arm_length, 0]
+      minkowski() {
+        polygon(points=[[rounding,
+                         rounding],
+                      [rounding,
+                       arm_thickness-rounding],
+                      [arm_length+arm_back_stop-arm_thickness+rounding,
+                       arm_thickness-rounding],
+                      [arm_length+arm_back_stop-arm_thickness+rounding,
+                       arm_thickness+arm_tooth_length-arm_thickness+rounding],
+                      [arm_length+arm_back_stop-arm_thickness-arm_tooth_grip+rounding,
+                       arm_thickness+arm_tooth_length-rounding],
+                      [arm_length+arm_back_stop-rounding,
+                       arm_thickness+arm_tooth_length-rounding],
+                      [arm_length+arm_back_stop-rounding,
+                       rounding]
                       ]);
+        circle(r=rounding);
+      }
     }
-    translate([arm_thickness/2, arm_thickness/2, 0]) {
+    translate([arm_thickness/2+arm_back_stop, arm_thickness/2, 0]) {
       rotate([90,0,0]) {
         cylinder(d=screw_diameter+screw_tolerance, h=arm_thickness + 0.1, center=true);
       }
@@ -80,7 +102,12 @@ module arm() {
 module center() {
   difference() {
     union() {
-      cube([center_length, center_width, center_height], center=true);
+      linear_extrude(height=center_height, center=true) {
+        minkowski() {
+          square([center_length-2*rounding, center_width-2*rounding], center=true);
+          circle(r=rounding);
+        }
+      }
 
       // tab
       rotate([0,center_tab_angle,0]) {
@@ -103,12 +130,20 @@ module center() {
     }
 
 
-    //thumb hinge
+    //thumb hinge small hole
     translate([(center_length - arm_thickness)/2,
-               0,
+               -center_width/2,
                0]) {
       rotate([90,0,0]) {
         cylinder(d=screw_diameter, h=center_width + 0.1, center=true);
+      }
+    }
+    //thumb hinge large hole
+    translate([(center_length - arm_thickness)/2,
+               center_width/2,
+               0]) {
+      rotate([90,0,0]) {
+        cylinder(d=screw_diameter+screw_tolerance, h=center_width + 0.1, center=true);
       }
     }
 
