@@ -4,6 +4,7 @@ arm_length = disc_diameter*2/3; //mm
 arm_tooth_length = 20; //mm
 arm_tooth_grip = 5; //mm
 arm_back_stop = 15; //mm
+arm_latch = 1; //mm
 
 thumb_tooth_length = arm_tooth_length; //mm 
 thumb_length = disc_diameter*1/3 + arm_thickness; //mm
@@ -13,14 +14,14 @@ thumb_string_hole_diameter = 5; //mm
 screw_diameter=3.0; //mm
 screw_tolerance=0.5; //mm
 
+attach_hole_diameter = 6.5; //mm
 center_height = arm_thickness;
-center_width = 4 * arm_thickness;
+center_width = 5 * attach_hole_diameter;
 center_length = 4 * arm_thickness;
 
 center_tab_thickness = 5; //mm
 center_tab_height = thumb_tooth_length;
 center_tab_angle = -15; // degrees
-attach_hole_diameter = 5; //mm
 
 rounding=2; //mm
 
@@ -74,7 +75,7 @@ module arm() {
     linear_extrude(height=arm_thickness, center=true) {
       minkowski() {
         polygon(points=[[rounding,
-                         rounding],
+                         rounding-arm_latch],
                       [rounding,
                        arm_thickness-rounding],
                       [arm_length+arm_back_stop-arm_thickness+rounding,
@@ -86,6 +87,8 @@ module arm() {
                       [arm_length+arm_back_stop-rounding,
                        arm_thickness+arm_tooth_length-rounding],
                       [arm_length+arm_back_stop-rounding,
+                       rounding],
+                      [rounding+arm_latch,
                        rounding]
                       ]);
         circle(r=rounding);
