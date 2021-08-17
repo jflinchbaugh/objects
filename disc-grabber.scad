@@ -3,12 +3,12 @@ arm_thickness = 8; //mm
 arm_length = disc_diameter*2/3; //mm
 arm_tooth_length = 20; //mm
 arm_tooth_grip = 5; //mm
-arm_back_stop = 15; //mm
+arm_back_stop = 1.5*arm_thickness; //mm
 arm_latch = 1; //mm
 
 thumb_tooth_length = arm_tooth_length; //mm 
 thumb_length = disc_diameter*1/3 + arm_thickness; //mm
-thumb_tooth_grip = 3; //mm
+thumb_tooth_grip = arm_tooth_grip; //mm
 thumb_string_hole_diameter = 5; //mm
 
 screw_diameter=3.0; //mm
@@ -19,7 +19,7 @@ center_height = arm_thickness;
 center_width = 5 * attach_hole_diameter;
 center_length = 4 * arm_thickness;
 
-center_tab_thickness = 5; //mm
+center_tab_thickness = 4; //mm
 center_tab_height = thumb_tooth_length;
 center_tab_angle = -15; // degrees
 
@@ -113,25 +113,40 @@ module center() {
       }
 
       // tab
-      rotate([0,center_tab_angle,0]) {
-        translate([-center_tab_thickness/2,0,(center_tab_height + center_height)/2]) {
-          difference() {
-            cube([center_tab_thickness, center_width, center_tab_height + center_height], center=true);
-            translate([0,
-                       center_width/2-attach_hole_diameter,
-                       (center_tab_height+center_height)/2-attach_hole_diameter]) {
-              rotate([0,90,0]) {
-                cylinder(d=attach_hole_diameter,h=center_tab_thickness + 0.1, center=true);
+      union() {
+          rotate([0,center_tab_angle,0]) {
+            translate([-center_tab_thickness/2,0,(center_tab_height + center_height)/2]) {
+              difference() {
+                cube([center_tab_thickness, center_width, center_tab_height + center_height], center=true);
+                translate([0,
+                           center_width/2-attach_hole_diameter,
+                           (center_tab_height+center_height)/2-attach_hole_diameter]) {
+                  rotate([0,90,0]) {
+                    cylinder(d=attach_hole_diameter,h=center_tab_thickness + 0.1, center=true);
+                  }
+                }
               }
             }
           }
         }
-      }
+        translate([-center_tab_thickness,0,(center_height)/2]) {
+            rotate([0,-center_tab_angle,0]) {
+                cube([center_tab_thickness, center_width, center_tab_thickness], center=true);
+            }
+        }
     }
+
     translate([center_length/4,0,0]) {
       cube([center_length/2 + 0.1, arm_thickness + hinge_tolerance, center_height + 0.1], center=true);
     }
 
+    translate([0,arm_thickness/2,0]) {
+      cylinder(d1=arm_thickness*1.25,d2=0,h=center_height+0.1, center=true);
+    }
+    
+    translate([0,arm_thickness/-2,0]) {
+      cylinder(d1=arm_thickness*1.25,d2=0,h=center_height+0.1, center=true);
+    }
 
     //thumb hinge small hole
     translate([(center_length - arm_thickness)/2,
