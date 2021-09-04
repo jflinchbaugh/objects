@@ -1,16 +1,25 @@
-wBase = 50;
-dBase = 10;
+wBase = 51;
+dBase = 11;
 hBase = 2;
 wTeeth = 1;
 dTeeth = 1;
 hTeeth = 10;
-teethSpace = 3;
+teethSpace = 5;
 
 union(){
     cube([wBase,dBase,hBase]); //base
-    for (h = [1:500]) {
-        translate ([teethSpace,0,0]){
+    for (h = [0:10]) {
+        translate ([teethSpace*h,0,0]){
         cube([wTeeth,dTeeth,hTeeth]);
+            translate ([0,teethSpace,0]){
+            cube([wTeeth,dTeeth,hTeeth]);
+            }
+            translate ([0,teethSpace*2,0]){
+            cube([wTeeth,dTeeth,hTeeth]);
+            }
+            //translate ([0,teethSpace*3,0]){
+            //cube([wTeeth,dTeeth,hTeeth]);
+            //}
         }
     }
         
