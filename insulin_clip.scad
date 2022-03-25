@@ -10,7 +10,7 @@ clip_gap = 5; // mm
 clip_wall_thickness = 2 * wall_thickness;
 clip_gap_radius = 2; //mm
 
-$fn=24;
+$fn=48;
 
 union() {
   ring();
