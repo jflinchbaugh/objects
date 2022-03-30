@@ -1,58 +1,87 @@
 post_diameter = 15; //mm
 trough_height = 20; //mm
-trough_length = 20; //mm
-thickness = 3; // mm
-plate_height = 35; //mm
+trough_length = 45; //mm
+shim = 24; //mm
+thickness = 2; // mm
+plate_height = 45; //mm
 radius = 2; //mm
 hole_diameter = 3; //mm
-angle = 0; //degrees
+
+horiz_angle = -10; //degrees
+vert_angle = 0; //degrees
 
 width = post_diameter + 4 * thickness;
-$fn=60;
+$fn = 64;
 
-union() {
-  plate(width, plate_height, radius, thickness);
-  trough(post_diameter, trough_height, trough_length, thickness, angle);
+hanger(width, plate_height, radius, thickness,
+       post_diameter, trough_height, trough_length,
+       0, 1);
+
+module hanger(width, plate_height, radius, thickness,
+              post_diameter, trough_height, trough_length,
+              horiz_angle, vert_angle) {
+  union() {
+    plate(width, plate_height, radius, thickness);
+    trough(
+          post_diameter,
+          trough_height,
+          trough_length,
+          thickness,
+          horiz_angle,
+          vert_angle);
+  }
 }
 
 module plate(w, h, radius, t) {
   linear_extrude(t, center=true) {
-    difference() {
-      minkowski() {
-        square([w - 2 * radius, h - 2 * radius], center=true);
-        circle(r=radius);
-      }
+      difference() {
+        minkowski() {
+          square([w - 2 * radius, h - 2 * radius], center=true);
+          circle(r=radius);
+        }
 
-      translate([w / 2 - 1.5 * hole_diameter, h / -2 + 1.5 * hole_diameter]) {
-        circle(d=hole_diameter);
-      }
+        translate([w / 2 - 1.5 * hole_diameter, h / -2 + 1.5 * hole_diameter]) {
+          circle(d=hole_diameter);
+        }
 
-      translate([w / -2 + 1.5 * hole_diameter, h / -2 + 1.5 * hole_diameter]) {
-        circle(d=hole_diameter);
+        translate([w / -2 + 1.5 * hole_diameter, h / -2 + 1.5 * hole_diameter]) {
+          circle(d=hole_diameter);
+        }
+        translate([0, h / 2 - 1.5 * hole_diameter]) {
+          circle(d=hole_diameter);
+        }
       }
-      translate([0, h / 2 - 1.5 * hole_diameter]) {
-        circle(d=hole_diameter);
-      }
-    }
   }
 }
 
-module trough(iw, ih, l, thickness, angle) {
+module trough(iw, ih, l, thickness, h_angle, v_angle) {
   difference() {
-    rotate([0, angle, 0]) {
-      translate([0, 0, -l]) {
-        linear_extrude(2 * l) {
-          difference() {
-            union() {
-              circle(d=iw + 2 * thickness);
-              translate([0, (iw-thickness)/2]) {
-                square([iw + 2 * thickness, ih - iw / 2], center=true);
-              }
+    rotate([v_angle, h_angle, 0]) {
+      union() {
+        linear_extrude(2 * l, center=true) {
+            difference() {
+              union() {
+                circle(d=iw + 2 * thickness);
+                translate([0, (ih - iw / 2) / 2]) {
+                  square([iw + 2 * thickness, ih - iw / 2], center=true);
+                }
             }
             union() {
               circle(d=iw);
-              translate([0, (iw-thickness)/2]) {
-                square([iw, ih - iw / 2], center=true);
+              translate([0, ih / 2]) {
+                square([iw, ih], center=true);
+              }
+            }
+          }
+        }
+
+        // insert shim
+        linear_extrude(2 * shim, center=true) {
+          difference() {
+            union() {
+              circle(d=iw + 2 * thickness);
+              translate([0, (ih - iw / 2) / 2]) {
+                square([iw + 2 * thickness, ih - iw / 2], center=true);
               }
             }
           }
