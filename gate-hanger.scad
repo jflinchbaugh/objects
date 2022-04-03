@@ -7,7 +7,7 @@ plate_height = 45; //mm
 radius = 2; //mm
 hole_diameter = 3; //mm
 
-horiz_angle = -10; //degrees
+horiz_angle = 0; //degrees
 vert_angle = 0; //degrees
 
 width = post_diameter + 4 * thickness;
@@ -15,7 +15,7 @@ $fn = 64;
 
 hanger(width, plate_height, radius, thickness,
        post_diameter, trough_height, trough_length,
-       0, 1);
+       horiz_angle, vert_angle );
 
 module hanger(width, plate_height, radius, thickness,
               post_diameter, trough_height, trough_length,
