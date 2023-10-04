@@ -8,7 +8,7 @@ $fn=48;
 linear_extrude(thickness, center=true) {
   minkowski() {
     union() {
-      translate([0, depth/2]) {
+      translate([0, depth/1.2]) {
         square([depth - 2 * bevel, latch_height - 2 * bevel], center=true);
       }
       translate([depth,0]) {
