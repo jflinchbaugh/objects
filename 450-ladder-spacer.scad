@@ -1,10 +1,10 @@
-wire_diameter = 2.05; //mm
+wire_diameter = 2.2; //mm
 separation = 20; //mm
-height = 10; //mm
+height = 5; //mm
 thickness = 1.2; //mm
 $fn=24;
 
-opening=0.8*wire_diameter;
+opening=0.7*wire_diameter;
 
 difference() {
   union() {
