@@ -1,6 +1,6 @@
-diameter=19.60;
-height=13;
-thickness=1.2;
+diameter=19.70;
+height=15;
+thickness=2.0;
 $fn=24;
 
 cylinder(d=diameter+2*thickness, h=2*thickness);
