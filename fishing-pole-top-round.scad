@@ -1,9 +1,9 @@
-thickness = 2.4; // mm
+thickness = 2.0; // mm
 height = 8;
-outer_diameter = 19; //mm
-inner_hole_diameter = 4.65; //mm
-outer_hole_diameter_w = 2 * inner_hole_diameter;
-outer_hole_diameter_n = inner_hole_diameter + thickness / 4;
+outer_diameter = 18; //mm
+inner_hole_diameter = 4.55; //mm
+outer_hole_diameter_n = (outer_diameter - inner_hole_diameter - 2 * thickness) / 2;
+outer_hole_diameter_w = 2 * outer_hole_diameter_n;
 $fn=24;
 
 difference() {
