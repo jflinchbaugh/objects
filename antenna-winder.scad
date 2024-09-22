@@ -1,16 +1,14 @@
 $fn=24;
-$connector=1;  //  BNC == 1,  Flange == 2
-$thickness = 5;
+$connector=1;  //  BNC == 1,  SO-239 == 2
+$thickness = 4;
 
 $toroid_hole_diameter = 10; //mm
 $toroid_outer_diameter = 28; // for mount holes
 
-$finger_length = 20;
-$arm_width = 85; // distance between arm holes
+$finger_length = 50;
 $body_length = 100;
 $body_width = 32;
 
-$arm_width_offset = $arm_width / 2;
 $body_length_offset = $body_length / 2;
 $body_width_offset = $body_width / 2;
 
@@ -22,212 +20,93 @@ module main_part() {
       union() {
         // fingers
         hull() {
-            translate ([ ($arm_width_offset+1.25), ($body_length_offset+$finger_length)])
-              circle(d=7.5);
-            translate ([($arm_width_offset+1.25),($body_length_offset-1.75)])
-              circle(d=7.5);
+          translate ([ ($body_width_offset+$finger_length/sqrt(2)), ($body_length_offset+$finger_length/sqrt(2))])
+              circle(d=7);
+            translate ([($body_width_offset-5),($body_length_offset-5)])
+              circle(d=20);
         }
         hull() {
-          translate ([-($arm_width_offset+1.25), ($body_length_offset+$finger_length)])
-            circle(d=7.5);
-          translate ([-($arm_width_offset + 1.25),($body_length_offset-1.75)])
-            circle(d=7.5);
+          translate ([-($body_width_offset+$finger_length/sqrt(2)), ($body_length_offset+$finger_length/sqrt(2))])
+            circle(d=7);
+          translate ([-($body_width_offset-5),($body_length_offset-5)])
+            circle(d=20);
         }
         hull() {
-          translate ([-($arm_width_offset+1.25),-($body_length_offset+$finger_length)])
-            circle(d=7.5);
-          translate ([-($arm_width_offset + 1.25),-($body_length_offset-1.75)])
-            circle(d=7.5);
+          translate ([-($body_width_offset+$finger_length/sqrt(2)),-($body_length_offset+$finger_length/sqrt(2))])
+            circle(d=7);
+          translate ([-($body_width_offset-5),-($body_length_offset-5)])
+            circle(d=20);
         }
         hull() {
-          translate ([ ($arm_width_offset+1.25),-($body_length_offset+$finger_length)])
-            circle(d=7.5);
-          translate ([($arm_width_offset + 1.25),-($body_length_offset-1.75)])
-            circle(d=7.5);
+          translate ([ ($body_width_offset+$finger_length/sqrt(2)),-($body_length_offset+$finger_length/sqrt(2))])
+            circle(d=7);
+          translate ([($body_width_offset-5),-($body_length_offset-5)])
+            circle(d=20);
         }
 
-        // arm
-        hull() {
-          translate ([($arm_width_offset - 1), ($body_length_offset-1.75)])
-            circle(d=12);
-          translate ([-($arm_width_offset - 1), ($body_length_offset-1.75)])
-            circle(d=12);
-          translate ([($arm_width_offset - 1), ($body_length_offset+5.25)])
-            circle(d=12); translate ([-($arm_width_offset - 1), ($body_length_offset+5.25)])circle(d=12);
-        }
-        // arm
-        hull() {
-          translate ([($arm_width_offset - 1),-($body_length_offset-1.75)])
-            circle(d=12); translate ([-($arm_width_offset - 1),-($body_length_offset-1.75)])circle(d=12);
-            translate ([($arm_width_offset - 1),-($body_length_offset+5.25)])
-              circle(d=12); translate ([-($arm_width_offset - 1),-($body_length_offset+5.25)])circle(d=12);
-        }
         // center body
         hull() {
-          translate ([0,$body_length_offset+15])
-            resize([$body_width+6.5,25])
+          //handle
+          translate ([0, ($body_length_offset+10)])
+            resize([20,20])
             circle(r=50);
-          hull() {
-            translate ([($body_width_offset-0.5),-($body_length_offset+12)])
-              circle(d=7.5);translate ([ -($body_width_offset-0.5), -($body_length_offset+12)])circle(d=7.5); }
-        }
-        square([($body_width+44),$body_length],center=true);
-        }
-
-      // cut out arms
-      hull() {
-        translate([($arm_width_offset-10.75), ($body_length_offset+12)]) circle(d=16.5);
-        translate([($body_width_offset+11.5),($body_length_offset+12)]) circle(d=16.5);
-        translate([($arm_width_offset-10.75), ($body_length_offset+17)]) circle(d=16.5);
-        translate([($body_width_offset+11.5),($body_length_offset+17)]) circle(d=16.5);
-      }
-      hull() {
-        translate ([-($arm_width_offset-10.75), ($body_length_offset+12)]) circle(d=16.5);
-        translate ([-($body_width_offset+11.5),($body_length_offset+12)])circle(d=16.5);
-        translate ([-($arm_width_offset-10.75), ($body_length_offset+17)]) circle(d=16.5);
-        translate ([-($body_width_offset+11.5),($body_length_offset+17)]) circle(d=16.5);
-      }
-      hull() {
-        translate([($arm_width_offset-10.75),-($body_length_offset+12)]) circle(d=16.5);
-        translate([($body_width_offset+11.5),-($body_length_offset+12)]) circle(d=16.5);
-        translate([($arm_width_offset-10.75),-($body_length_offset+17)]) circle(d=16.5);
-        translate([($body_width_offset+11.5),-($body_length_offset+17)])circle(d=16.5);
-      }
-      hull() {
-        translate ([-($arm_width_offset-10.75),-($body_length_offset+12)]) circle(d=16.5);
-        translate ([-($body_width_offset+11.5),-($body_length_offset+12)]) circle(d=16.5);
-        translate ([-($arm_width_offset-10.75),-($body_length_offset+17)]) circle(d=16.5);
-        translate ([-($body_width_offset+11.5),-($body_length_offset+17)])circle(d=16.5);
+          //body
+          translate ([($body_width_offset-0.5),$body_length_offset])
+            circle(d=7.5);
+          translate ([-($body_width_offset-0.5),$body_length_offset])
+            circle(d=7.5);
+          translate ([($body_width_offset-0.5),-$body_length_offset])
+            circle(d=7.5);
+          translate ([ -($body_width_offset-0.5), -$body_length_offset])
+            circle(d=7.5);
+          }
       }
 
       // cut out handle
-      translate ([0, ($body_length_offset+15)]) resize([$body_width,20])circle(r=50);
+      translate ([0, ($body_length_offset+10)])
+        resize([12,12])
+        circle(r=50);
 
-      // cut out between arms
-      hull() {
-        translate([ ($body_width_offset+22),   ($body_length_offset-27.75)])circle(d=40); translate ([($body_width_offset+22),-($body_length_offset-27.75)])circle(d=40);
-      }
-      hull() {
-        translate([-($body_width_offset+22),   ($body_length_offset-27.75)])circle(d=40); translate ([-($body_width_offset+22),-($body_length_offset-27.75)])circle(d=40);
-      }
     }
   }
 }
 
-module remove_part()
-  {
-  translate([0,0,$thickness - 1])linear_extrude(height = $thickness, center = true, convexity = 10 )
-    {
-    difference()
-      {
-      union()
-        {
-          // fingers
-        hull() {
-          translate([($arm_width_offset+1.25), ($body_length_offset+$finger_length)]) circle(d=4.5);
-          translate([($arm_width_offset + 1.25),($body_length_offset-1.75)]) circle(d=4.5); }
-        hull() {
-          translate([-($arm_width_offset+1.25), ($body_length_offset+$finger_length)]) circle(d=4.5);
-          translate([-($arm_width_offset + 1.25),($body_length_offset-1.75)]) circle(d=4.5); }
-        hull() {
-          translate([-($arm_width_offset+1.25),-($body_length_offset+$finger_length)]) circle(d=4.5);
-          translate([-($arm_width_offset + 1.25),-($body_length_offset-1.75)])circle(d=4.5); }
-        hull() { translate([ ($arm_width_offset+1.25),-($body_length_offset+$finger_length)])circle(d=4.5); translate ([($arm_width_offset + 1.25),-($body_length_offset-1.75)])circle(d=4.5); }
-        hull() { translate ([    ($arm_width_offset - 1), ($body_length_offset-1.75)])circle(d=9); translate ([-($arm_width_offset - 1), ($body_length_offset-1.75)])circle(d=9);
-                 translate ([    ($arm_width_offset - 1), ($body_length_offset+7)])circle(d=9); translate ([-($arm_width_offset - 1), ($body_length_offset+7)])circle(d=9); }
-        hull() { translate ([    ($arm_width_offset - 1),-($body_length_offset-1.75)])circle(d=9); translate ([-($arm_width_offset - 1),-($body_length_offset-1.75)])circle(d=9);
-                 translate ([    ($arm_width_offset - 1),-($body_length_offset+8)]) circle(d=9); translate ([-($arm_width_offset - 1),-($body_length_offset+8)])circle(d=9); }
-        hull() { translate ([    0,($body_length_offset+15)]) resize([$body_width+3.5,23])circle(r=($body_length_offset+12));
-          hull() { translate ([($body_width_offset-0.5),-($body_length_offset+12)])circle(d=4.5);translate ([ -($body_width_offset-0.5), -($body_length_offset+12)])circle(d=4.5); }
-            }
-        square([($body_width+44),$body_length],center=true);
-        }
-
-      // cut out arms
-      hull() {
-        translate([($arm_width_offset-10.75), ($body_length_offset+12)]) circle(d=19.5);
-        translate([($body_width_offset+11.5),($body_length_offset+12)]) circle(d=19.5);
-        translate([($arm_width_offset-10.75), ($body_length_offset+17)]) circle(d=19.5);
-        translate ([($body_width_offset+11.5),($body_length_offset+17)]) circle(d=19.5); }
-
-      hull() {
-        translate([ ($arm_width_offset-10.75),-($body_length_offset+12)]) circle(d=19.5); translate ([($body_width_offset+11.5),-($body_length_offset+12)])circle(d=19.5);
-        translate ([ ($arm_width_offset-10.75),-($body_length_offset+17)])circle(d=19.5); translate ([($body_width_offset+11.5),-($body_length_offset+17)])circle(d=19.5); }
-      hull() { translate ([-($arm_width_offset-10.75), ($body_length_offset+12)]) circle(d=19.5); translate ([-($body_width_offset+11.5),($body_length_offset+12)]) circle(d=19.5);
-               translate ([-($arm_width_offset-10.75), ($body_length_offset+17)]) circle(d=19.5); translate ([-($body_width_offset+11.5),($body_length_offset+17)])circle(d=19.5); }
-      hull() { translate ([-($arm_width_offset-10.75),-($body_length_offset+12)])circle(d=19.5); translate ([-($body_width_offset+11.5),-($body_length_offset+12)])circle(d=19.5);
-               translate ([-($arm_width_offset-10.75),-($body_length_offset+17)]) circle(d=19.5); translate ([-($body_width_offset+11.5),-($body_length_offset+17)])circle(d=19.5); }
-               translate ([  0,   ($body_length_offset+15)]) resize([$body_width+1,22])circle(r=50);
-
-      // cut out between arms
-      hull() { translate ([ ($body_width_offset+22),   ($body_length_offset-27.75)])circle(d=43); translate ([($body_width_offset+22),-($body_length_offset-27.75)])circle(d=43); }
-      hull() { translate ([-($body_width_offset+22),   ($body_length_offset-27.75)])circle(d=43); translate ([-($body_width_offset+22),-($body_length_offset-27.75)])circle(d=43); }
-      }
-    }
-  }
-
 difference()
 {
-  union()
-  {
-    difference() {
-      main_part();
-      remove_part();
-    }
-
-    // pad in toroid
-    cylinder(d=$toroid_hole_diameter + 2,h=$thickness - 1, center = true);
-
-    // screw pads near handle
-    translate([9,($body_length_offset-3),0])cylinder(d=10,h=$thickness-1,center=true);
-    translate([-9,($body_length_offset-3),0])cylinder(d=10,h=$thickness-1,center=true);
-
-
-    // screw pads on connector end
-    translate([9,-$body_length_offset+18,0])cylinder(d=10,h=$thickness-1,center=true);
-    translate([-9,-$body_length_offset+18,0])cylinder(d=10,h=$thickness-1,center=true);
-  }
+  main_part();
 
   // holes to mount toroid
-  rotate([0,0,45]) {
-    translate([0,0,0]) cylinder(d=$toroid_hole_diameter,h=15,center=true);
-    translate([$toroid_outer_diameter/2,0,0]) cylinder(d=6,h=15,center=true);
-    translate([-$toroid_outer_diameter/2,0,0]) cylinder(d=6,h=15,center=true);
-    translate([0, $toroid_outer_diameter/2,0]) cylinder(d=6,h=15,center=true);
-    translate([0, -$toroid_outer_diameter/2,0]) cylinder(d=6,h=15,center=true);
+  translate([0,16,0]) {
+    rotate([0,0,45]) {
+      translate([0,0,0]) cylinder(d=$toroid_hole_diameter,h=15,center=true);
+      translate([$toroid_outer_diameter/2,0,0]) cylinder(d=6,h=15,center=true);
+      translate([-$toroid_outer_diameter/2,0,0]) cylinder(d=6,h=15,center=true);
+      translate([0, $toroid_outer_diameter/2,0]) cylinder(d=6,h=15,center=true);
+      translate([0, -$toroid_outer_diameter/2,0]) cylinder(d=6,h=15,center=true);
+    }
   }
-
-  // holes in arms
-  translate([-$arm_width_offset,-$body_length_offset+2,0])cylinder(d=6,h=15,center=true);
-  translate([$arm_width_offset,-$body_length_offset+2,0])cylinder(d=6,h=15,center=true);
-  translate([-$arm_width_offset,$body_length_offset-2,0])cylinder(d=6,h=15,center=true);
-  translate([$arm_width_offset,$body_length_offset-2,0])cylinder(d=6,h=15,center=true);
-
-  // wire holes near handle
-  translate([18,$body_length_offset+1,0])cylinder(d=$wire_hole_diameter,h=15,center=true);
-  translate([18,$body_length_offset-5.5,0])cylinder(d=$wire_hole_diameter,h=15,center=true);
-  translate([-18,$body_length_offset+1,0])cylinder(d=$wire_hole_diameter,h=15,center=true);
-  translate([-18,$body_length_offset-5.5,0])cylinder(d=$wire_hole_diameter,h=15,center=true);
 
   // screw holes near handle
   translate([9,($body_length_offset-3),0])cylinder(d=5,h=15,center=true);
   translate([-9,($body_length_offset-3),0])cylinder(d=5,h=15,center=true);
 
+  // wire holes near handle
+  translate([0,$body_length_offset-3,0])cylinder(d=$wire_hole_diameter,h=15,center=true);
+  translate([0,$body_length_offset-8,0])cylinder(d=$wire_hole_diameter,h=15,center=true);
+
   // screw holes on connector end
-  translate([9,-$body_length_offset+18,0])cylinder(d=5,h=15,center=true);
-  translate([-9,-$body_length_offset+18,0])cylinder(d=5,h=15,center=true);
+  translate([9,-$body_length_offset+35,0])cylinder(d=5,h=15,center=true);
+  translate([-9,-$body_length_offset+35,0])cylinder(d=5,h=15,center=true);
 
   // wire holes on connector end
-  translate([18,-($body_length_offset+1),0])cylinder(d=$wire_hole_diameter,h=15,center=true);
-  translate([18,-($body_length_offset-5.5),0])cylinder(d=$wire_hole_diameter,h=15,center=true);
-  translate([-18,-($body_length_offset+1),0])cylinder(d=$wire_hole_diameter,h=15,center=true);
-  translate([-18,-($body_length_offset-5.5),0])cylinder(d=$wire_hole_diameter,h=15,center=true);
-  }
+  translate([0,-$body_length_offset+35,0])cylinder(d=$wire_hole_diameter,h=15,center=true);
+  translate([0,-$body_length_offset+30,0])cylinder(d=$wire_hole_diameter,h=15,center=true);
+}
 
 // bnc
 if($connector==1)
   {
-  translate ([0,-$body_length/2-14.25,$thickness/2 + 8])
+  translate ([0,-$body_length_offset-2.25,$thickness/2 + 8.5])
   difference()
   {
   union()
@@ -263,7 +142,7 @@ if($connector==1)
 // so239
 if($connector==2)
   {
-  translate ([0,-$body_length/2-15.8,$thickness/2 +11.5])
+  translate ([0,-$body_length_offset-2,$thickness/2+13])
   difference()
     {
     union()
