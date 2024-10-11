@@ -6,7 +6,7 @@ $toroid_hole_diameter = 10; //mm
 $toroid_outer_diameter = 28; // for mount holes
 
 $finger_length = 50;
-$body_length = 100;
+$body_length = 90;
 $body_width = 32;
 
 $body_length_offset = $body_length / 2;
