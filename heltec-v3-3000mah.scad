@@ -72,6 +72,7 @@ if (top) {
     }
 
     // cut corners
+    /*
     translate([
         (board_length+3*wall_thickness)/2+top_tolerance,
         -(board_width+3*wall_thickness)/2+10-top_tolerance,
@@ -90,7 +91,6 @@ if (top) {
         floor_thickness]) {
       cube([3,3,top_height+floor_thickness], center=true);
     }
-
 
     translate([
         (board_length+3*wall_thickness)/2-10+top_tolerance,
@@ -117,8 +117,8 @@ if (top) {
         floor_thickness]) {
       cube([3,3,top_height+floor_thickness], center=true);
     }
+     */
   }
-
 
   // buttons
   translate([
