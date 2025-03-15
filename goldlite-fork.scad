@@ -1,18 +1,20 @@
+// a fork to guide wire attach to goldlight fishing rods
 plug_diameter=10.70;
 plug_height=10;
 plug_taper=0.5;
-
-// 1 = print the fork/loop, 0 = cut holes to add wire
-fork=0;
-fork_length=15;
-fork_thickness=2.0;
-fork_angle=15;
 
 hole_diameter=4.35;
 hole_taper=0.5;
 slot=1;
 
-wire_hole_diameter=2;//mm
+// 1 = print the fork/loop,
+// 0 = cut holes to add wire as the fork
+fork=0;
+fork_length=15;
+fork_thickness=2.0;
+fork_angle=15;
+
+wire_hole_diameter=2.2; //mm
 
 $fn=24;
 
@@ -27,7 +29,9 @@ difference() {
             resize([fork_length,plug_diameter/1.25,fork_thickness]) {
               cylinder(d=fork_length,h=fork_thickness,center=true);
             }
-            resize([fork_length-2*fork_thickness,plug_diameter/1.25-2*fork_thickness,fork_thickness+0.01]) {
+            resize([fork_length-2*fork_thickness,
+                    plug_diameter/1.25-2*fork_thickness,
+                    fork_thickness+0.01]) {
               cylinder(d=fork_length,h=fork_thickness,center=true);
             }
           }
@@ -40,7 +44,9 @@ difference() {
             resize([fork_length,plug_diameter/1.25,fork_thickness]) {
               cylinder(d=fork_length,h=fork_thickness,center=true);
             }
-            resize([fork_length-2*fork_thickness,plug_diameter/1.25-2*fork_thickness,fork_thickness+0.01]) {
+            resize([fork_length-2*fork_thickness,
+                    plug_diameter/1.25-2*fork_thickness,
+                    fork_thickness+0.01]) {
               cylinder(d=fork_length,h=fork_thickness,center=true);
             }
           }
