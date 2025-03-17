@@ -1,10 +1,20 @@
-// organizer to hold specific pocket items flat
+// organizer to hold specific pocket items in a flat row
 
 thickness = 10; // mm
 wall_thickness = 2.4; //mm
 
+holders([
+         [24, 24],
+         [40, 20],
+         [26, 26],
+         [15, 15],
+         ]);
+
+function first(lst) = lst[0];
+function rest(lst) = (len(lst) <= 1) ? [] : [for (i = [1:len(lst)-1]) lst[i]];
+
 module holder(width, height) {
-  translate([0,height/2+1.5*wall_thickness,0]) {
+  translate([width/2,height/2+1.5*wall_thickness,0]) {
     difference() {
       minkowski() {
         cube([width, height+wall_thickness, thickness-2*wall_thickness], center=true);
@@ -17,23 +27,14 @@ module holder(width, height) {
   }
 }
 
-pills_diam=24;
-translate([pills_diam/2+wall_thickness,0,0]) {
-  holder(pills_diam, pills_diam);
-}
+module holders(dimensions) {
+  dim = first(dimensions);
+  if (dim) {
+    holder(dim[0], dim[1]);
+    others = rest(dimensions);
 
-multitool_height=20;
-multitool_width=40;
-translate([pills_diam+multitool_width/2+2*wall_thickness,0,0]) {
-  holder(multitool_width, multitool_height);
-}
-
-cough_drops_diam=26;
-translate([(multitool_width+pills_diam+cough_drops_diam/2 + 3* wall_thickness),0,0]) {
-  holder(cough_drops_diam, cough_drops_diam);
-}
-
-chapstick_diam=15;
-translate([(multitool_width+pills_diam+cough_drops_diam+chapstick_diam/2 + 4 * wall_thickness),0,0]) {
-  holder(chapstick_diam, chapstick_diam);
+    translate([dim[0] + wall_thickness, 0, 0]) {
+      holders(others);
+    }
+  }
 }
