@@ -28,192 +28,148 @@ button_width = 6;
 button_inset = 5;
 
 // choose the part to print
-bottom = false;
+bottom = true;
 top = true;
 
 $fn=24;
 
 if (top) {
-  difference() {
-    translate([0,(battery_length+wall_thickness)/2,0]) {
-      box(
-          board_length+2*wall_thickness+2*top_tolerance,
-          board_width+battery_length+wall_thickness+2*wall_thickness+2*top_tolerance,
-          top_height);
-    }
-    // cut port
-    translate([
-        -(board_length+3*wall_thickness)/2-top_tolerance,
-        0,
-        floor_thickness]) {
-      cube([wall_thickness*2, port_width, top_height], center=true);
+  translate([screen_width + 5, 0, 0]) {
+    difference() {
+      translate([0,(battery_length+wall_thickness)/2,0]) {
+        box(
+            board_length+2*wall_thickness+2*top_tolerance,
+            board_width+battery_length+wall_thickness+2*wall_thickness+2*top_tolerance,
+            top_height);
+      }
+      // cut port
+      translate([
+          -(board_length+3*wall_thickness)/2-top_tolerance,
+          0,
+          floor_thickness]) {
+        cube([wall_thickness*2, port_width, top_height], center=true);
+      }
+
+      // cut screen
+      translate([
+          (board_length+2*wall_thickness-screen_width)/2+top_tolerance-screen_x_offset,
+          -(board_width+2*wall_thickness-screen_height)/2-top_tolerance+screen_y_offset,
+          -(top_height)/2]) {
+        cube([screen_width, screen_height, 2 * floor_thickness], center=true);
+      }
+
+      // cut buttons
+      translate([
+          -(board_length+2*wall_thickness)/2+top_tolerance+button_inset,
+          (button_spacing)/2,
+          -(top_height)/2]) {
+        cylinder(d=button_width+1.5,h=2*floor_thickness, center=true);
+      }
+      translate([
+          -(board_length+2*wall_thickness)/2+top_tolerance+button_inset,
+          -(button_spacing)/2,
+          -(top_height)/2]) {
+        cylinder(d=button_width+1.5,h=2*floor_thickness, center=true);
+      }
     }
 
-    // cut screen
-    translate([
-        (board_length+2*wall_thickness-screen_width)/2+top_tolerance-screen_x_offset,
-        -(board_width+2*wall_thickness-screen_height)/2-top_tolerance+screen_y_offset,
-        -(top_height)/2]) {
-      cube([screen_width, screen_height, 2 * floor_thickness], center=true);
-    }
-
-    // cut buttons
+    // buttons
     translate([
         -(board_length+2*wall_thickness)/2+top_tolerance+button_inset,
         (button_spacing)/2,
         -(top_height)/2]) {
-      cylinder(d=button_width+1.5,h=2*floor_thickness, center=true);
+      cylinder(d=button_width,h=floor_thickness, center=true);
+      translate([0,-button_width/2,0]) {
+        cube([2,2,floor_thickness], center=true);
+      }
+      translate([0,0,(button_depth+floor_thickness)/2]) {
+        cylinder(d=button_width/2,h=floor_thickness+button_depth, center=true);
+      }
     }
     translate([
         -(board_length+2*wall_thickness)/2+top_tolerance+button_inset,
         -(button_spacing)/2,
         -(top_height)/2]) {
-      cylinder(d=button_width+1.5,h=2*floor_thickness, center=true);
-    }
-
-    // cut corners
-    /*
-    translate([
-        (board_length+3*wall_thickness)/2+top_tolerance,
-        -(board_width+3*wall_thickness)/2+10-top_tolerance,
-        floor_thickness]) {
-      cube([3,3,top_height+floor_thickness], center=true);
-    }
-    translate([
-        (board_length+3*wall_thickness)/2-10+top_tolerance,
-        -(board_width+3*wall_thickness)/2-top_tolerance,
-        floor_thickness]) {
-      cube([3,3,top_height+floor_thickness], center=true);
-    }
-    translate([
-        -(board_length+3*wall_thickness)/2+10-top_tolerance,
-        -(board_width+3*wall_thickness)/2-top_tolerance,
-        floor_thickness]) {
-      cube([3,3,top_height+floor_thickness], center=true);
-    }
-
-    translate([
-        (board_length+3*wall_thickness)/2-10+top_tolerance,
-        (board_width+3*wall_thickness)/2+battery_length+wall_thickness+top_tolerance,
-        floor_thickness]) {
-      cube([3,3,top_height+floor_thickness], center=true);
-    }
-    translate([
-        (board_length+3*wall_thickness)/2+top_tolerance,
-        (board_width+3*wall_thickness)/2+battery_length+wall_thickness+top_tolerance-10,
-        floor_thickness]) {
-      cube([3,3,top_height+floor_thickness], center=true);
-    }
-
-    translate([
-        -(board_length+3*wall_thickness)/2+10-top_tolerance,
-        (board_width+3*wall_thickness)/2+battery_length+wall_thickness+top_tolerance,
-        floor_thickness]) {
-      cube([3,3,top_height+floor_thickness], center=true);
-    }
-    translate([
-        -(board_length+3*wall_thickness)/2-top_tolerance,
-        (board_width+3*wall_thickness)/2+battery_length+wall_thickness-10+top_tolerance,
-        floor_thickness]) {
-      cube([3,3,top_height+floor_thickness], center=true);
-    }
-     */
-  }
-
-  // buttons
-  translate([
-      -(board_length+2*wall_thickness)/2+top_tolerance+button_inset,
-      (button_spacing)/2,
-      -(top_height)/2]) {
-    cylinder(d=button_width,h=floor_thickness, center=true);
-    translate([0,-button_width/2,0]) {
-      cube([2,2,floor_thickness], center=true);
-    }
-    translate([0,0,(button_depth+floor_thickness)/2]) {
-      cylinder(d=button_width/2,h=floor_thickness+button_depth, center=true);
-    }
-  }
-  translate([
-      -(board_length+2*wall_thickness)/2+top_tolerance+button_inset,
-      -(button_spacing)/2,
-      -(top_height)/2]) {
-    cylinder(d=button_width,h=floor_thickness, center=true);
-    translate([0,button_width/2,0]) {
-      cube([2,2,floor_thickness], center=true);
-    }
-    translate([0,0,(button_depth+floor_thickness)/2]) {
-      cylinder(d=button_width/2,h=floor_thickness+button_depth, center=true);
+      cylinder(d=button_width,h=floor_thickness, center=true);
+      translate([0,button_width/2,0]) {
+        cube([2,2,floor_thickness], center=true);
+      }
+      translate([0,0,(button_depth+floor_thickness)/2]) {
+        cylinder(d=button_width/2,h=floor_thickness+button_depth, center=true);
+      }
     }
   }
 }
 
 if (bottom) {
-  difference() {
-    union() {
-      // outer wall
-      translate([0,(battery_length+wall_thickness)/2,0]) {
-        box(
-            board_length,
-            board_width+battery_length+wall_thickness,
-            inner_height);
+  translate([-screen_width - 5, 0, 0]) {
+    difference() {
+      union() {
+        // outer wall
+        translate([0,(battery_length+wall_thickness)/2,0]) {
+          box(
+              board_length,
+              board_width+battery_length+wall_thickness,
+              inner_height);
+        }
+
+        // board box
+        box(board_length, board_width, inner_height);
+
+        // board support
+        translate([
+                  0,
+                  (board_width-board_support_width)/2,
+                  -(inner_height-board_support_height-floor_thickness)/2]) {
+          cube([board_length-2*slot_width, board_support_width,board_support_height], center=true);
+        }
+        translate([
+                  0,
+                  -(board_width-board_support_width)/2,
+                  -(inner_height-board_support_height-floor_thickness)/2]) {
+          cube([board_length, board_support_width,board_support_height], center=true);
+        }
+
+
+        // battery box
+        translate([(
+                    board_length-battery_width)/2,
+                  (battery_length+board_width)/2+wall_thickness,
+                  0]) {
+          box(battery_width, battery_length, inner_height);
+        }
       }
 
-      // board box
-      box(board_length, board_width, inner_height);
-
-      // board support
+      // cut wiring slots
       translate([
-                0,
-                (board_width-board_support_width)/2,
-                -(inner_height-board_support_height-floor_thickness)/2]) {
-        cube([board_length-2*slot_width, board_support_width,board_support_height], center=true);
-      }
-      translate([
-                0,
-                -(board_width-board_support_width)/2,
-                -(inner_height-board_support_height-floor_thickness)/2]) {
-        cube([board_length, board_support_width,board_support_height], center=true);
-      }
-
-
-      // battery box
-      translate([(
-                  board_length-battery_width)/2,
-                (battery_length+board_width)/2+wall_thickness,
-                0]) {
-        box(battery_width, battery_length, inner_height);
-      }
-    }
-
-    // cut wiring slots
-    translate([
-      (board_length-slot_width)/2,
-      (board_width+wall_thickness)/2,
-      floor_thickness]) {
-    cube([
-          slot_width,
-          2*wall_thickness,
-          inner_height+floor_thickness],
-        center = true);
-    }
-
-    translate([
-            -(board_length-slot_width)/2,
-            (board_width+wall_thickness)/2,
-              floor_thickness]) {
+        (board_length-slot_width)/2,
+        (board_width+wall_thickness)/2,
+        floor_thickness]) {
       cube([
             slot_width,
             2*wall_thickness,
             inner_height+floor_thickness],
           center = true);
-    }
+      }
 
-    // cut port
-  translate([
-            (board_length+wall_thickness)/2,
-            0,
-            floor_thickness+port_height+board_support_height]) {
-  cube([wall_thickness*2, port_width, inner_height], center=true);
+      translate([
+              -(board_length-slot_width)/2,
+              (board_width+wall_thickness)/2,
+                floor_thickness]) {
+        cube([
+              slot_width,
+              2*wall_thickness,
+              inner_height+floor_thickness],
+            center = true);
+      }
+
+      // cut port
+    translate([
+              (board_length+wall_thickness)/2,
+              0,
+              floor_thickness+port_height+board_support_height]) {
+    cube([wall_thickness*2, port_width, inner_height], center=true);
+      }
     }
   }
 }
