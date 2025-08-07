@@ -1,7 +1,7 @@
 battery_length = 67;
 battery_width = 37;
 
-board_length = 53;
+board_length = 52.75;
 board_width = 27.1;
 
 wall_thickness = 1.6;
@@ -11,16 +11,17 @@ board_support_height=4;
 board_support_width=1.75;
 
 slot_width = 5;
-port_width = 12;
-port_height = 1;
+port_width = 14;
+port_height = 0;
 
-top_height = inner_height + floor_thickness;
-top_tolerance = 0.5;
+top_height = (inner_height + floor_thickness) * 0.5;
+top_tolerance = 0.50;
 
 screen_width = 26.5;
 screen_height = 14.5;
 screen_y_offset = 7.0;
 screen_x_offset = 10;
+screen_border_thickness = 0.5;
 
 button_spacing = 15.75;
 button_depth = 1.3;
@@ -34,7 +35,7 @@ top = true;
 $fn=24;
 
 if (top) {
-  translate([screen_width + 5, 0, 0]) {
+  translate([board_length / 2 + 5 , 0, (top_height+floor_thickness)/2]) {
     difference() {
       translate([0,(battery_length+wall_thickness)/2,0]) {
         box(
@@ -98,11 +99,29 @@ if (top) {
         cylinder(d=button_width/2,h=floor_thickness+button_depth, center=true);
       }
     }
+
+    // screen border
+    translate([
+        (board_length+2*wall_thickness-screen_width)/2+top_tolerance-screen_x_offset,
+        -(board_width+2*wall_thickness-screen_height)/2-top_tolerance+screen_y_offset,
+        -(top_height)/2 + screen_border_thickness]) {
+      difference() {
+        border_height = floor_thickness + screen_border_thickness;
+        cube([screen_width + 2 * wall_thickness,
+              screen_height + 2 * wall_thickness,
+              border_height],
+             center=true);
+        cube([screen_width,
+              screen_height,
+              border_height + 0.1],
+             center=true);
+      }
+    }
   }
 }
 
 if (bottom) {
-  translate([-screen_width - 5, 0, 0]) {
+  translate([-board_length / 2 - 5, 0, (inner_height+floor_thickness)/2]) {
     difference() {
       union() {
         // outer wall
@@ -164,11 +183,11 @@ if (bottom) {
       }
 
       // cut port
-    translate([
+      translate([
               (board_length+wall_thickness)/2,
               0,
               floor_thickness+port_height+board_support_height]) {
-    cube([wall_thickness*2, port_width, inner_height], center=true);
+        cube([wall_thickness*2, port_width, inner_height], center=true);
       }
     }
   }
