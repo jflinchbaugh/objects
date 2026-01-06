@@ -14,14 +14,14 @@ slot_width = 5;
 port_width = 14;
 port_height = 0;
 
-top_height = (inner_height + floor_thickness) * 0.5;
-top_tolerance = 0.50;
+top_height = (inner_height + floor_thickness) * 0.75;
+top_tolerance = 0.55;
 
-screen_width = 26.5;
+screen_width = 26.0;
 screen_height = 14.5;
 screen_y_offset = 7.0;
 screen_x_offset = 10;
-screen_border_thickness = 0.5;
+screen_border_thickness = 0.2;
 
 button_spacing = 15.75;
 button_depth = 1.3;
@@ -64,13 +64,13 @@ if (top) {
           -(board_length+2*wall_thickness)/2+top_tolerance+button_inset,
           (button_spacing)/2,
           -(top_height)/2]) {
-        cylinder(d=button_width+1.5,h=2*floor_thickness, center=true);
+        cylinder(d=button_width+2,h=2*floor_thickness, center=true);
       }
       translate([
           -(board_length+2*wall_thickness)/2+top_tolerance+button_inset,
           -(button_spacing)/2,
           -(top_height)/2]) {
-        cylinder(d=button_width+1.5,h=2*floor_thickness, center=true);
+        cylinder(d=button_width+2,h=2*floor_thickness, center=true);
       }
     }
 
@@ -81,7 +81,7 @@ if (top) {
         -(top_height)/2]) {
       cylinder(d=button_width,h=floor_thickness, center=true);
       translate([0,-button_width/2,0]) {
-        cube([2,2,floor_thickness], center=true);
+        cube([2.5,2,floor_thickness], center=true);
       }
       translate([0,0,(button_depth+floor_thickness)/2]) {
         cylinder(d=button_width/2,h=floor_thickness+button_depth, center=true);
@@ -93,7 +93,7 @@ if (top) {
         -(top_height)/2]) {
       cylinder(d=button_width,h=floor_thickness, center=true);
       translate([0,button_width/2,0]) {
-        cube([2,2,floor_thickness], center=true);
+        cube([2.5,2,floor_thickness], center=true);
       }
       translate([0,0,(button_depth+floor_thickness)/2]) {
         cylinder(d=button_width/2,h=floor_thickness+button_depth, center=true);
