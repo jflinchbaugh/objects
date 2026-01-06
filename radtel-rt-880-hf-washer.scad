@@ -1,6 +1,6 @@
-outer_diameter = 11; //mm
+outer_diameter = 11.5; //mm
 inner_diameter = 7.5; //mm
-height = 6.5;//mm
+height = 4.5;//mm
 $fn=24;
 
 difference() {
