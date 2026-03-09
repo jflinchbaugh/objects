@@ -73,19 +73,16 @@ difference() {
 
   // tension relief
 
-    translate([0, 0,
-             (blockHeight - tensionHoleDiameter) / 2 - thickness]) {
-      translate([(blockWidth - tensionHoleDiameter) / 2 - thickness, 0, 0]) {
-        rotate([90,0,0]) {
-          cylinder(d = tensionHoleDiameter, h = thickness + 0.01, center = true);
-        }
-      }
-
-      translate([(blockWidth - tensionHoleDiameter) / 2 - 2 * thickness - tensionHoleDiameter, 0, 0]) {
-        rotate([90,0,0]) {
-          cylinder(d = tensionHoleDiameter, h = thickness + 0.01, center = true);
-        }
-      }
+  translate([plugWidth / 2 + tensionHoleDiameter, 0, tensionHoleDiameter / 1.5]) {
+    rotate([90,0,0]) {
+      cylinder(d = tensionHoleDiameter, h = thickness + 0.01, center = true);
     }
+  }
+
+  translate([plugWidth / 2 + tensionHoleDiameter, 0, tensionHoleDiameter / -1.5]) {
+    rotate([90,0,0]) {
+      cylinder(d = tensionHoleDiameter, h = thickness + 0.01, center = true);
+    }
+  }
 }
 
