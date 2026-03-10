@@ -5,6 +5,7 @@ terminalHeight = 3.5; //mm
 terminalBottomOffset = 3.4; //mm
 terminalLength = 9; //mm
 terminalShellThickness = 2; //mm
+terminalExtraWidth = 1; //mm
 
 plugWidth = 12; //mm
 thickness = 4; //mm
@@ -12,6 +13,8 @@ thickness = 4; //mm
 tensionHoleDiameter = 5; //mm
 
 radius = 1; //mm
+
+tolerance = 0.05; //mm
 
 $fn = 60;
 
@@ -86,3 +89,40 @@ difference() {
   }
 }
 
+// front covers
+translate([0,-20,0]) {
+  difference() {
+    minkowski() {
+      cube([terminalWidth + 2 * terminalShellThickness - 2 * radius,
+            2 * thickness + 2 * terminalShellThickness - 2 * radius,
+            blockHeight + terminalShellThickness - 2 * radius],
+           center = true);
+      sphere(r = radius);
+    }
+    translate([0,
+                thickness + terminalShellThickness,
+      -(terminalShellThickness + blockHeight)/4]) {
+      cube([terminalWidth + 2 * terminalShellThickness,
+            2 * thickness + 2 * terminalShellThickness,
+            (blockHeight + thickness) / 2],
+           center = true);
+    }
+    #translate([0,
+                thickness - terminalShellThickness,
+                -terminalShellThickness + tolerance]) {
+      cube([terminalWidth + 2 * terminalShellThickness,
+            thickness + tolerance,
+            (blockHeight + terminalShellThickness)],
+           center = true);
+    }
+    translate([0,
+               0,
+               -terminalShellThickness]) {
+        cube([terminalWidth + terminalExtraWidth,
+        2 * thickness,
+          (blockHeight + terminalShellThickness)],
+        center = true);
+    }
+
+  }
+}
